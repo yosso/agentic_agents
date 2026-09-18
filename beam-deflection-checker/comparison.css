@@ -1,0 +1,12 @@
+.cross-check{margin-bottom:16px;border-left:4px solid #bd6b21}
+.cross-check h2{margin-top:12px}
+.cross-check .hint:last-child{margin-bottom:0}
+.check-error{border-left-color:#b63c39}
+.legend{flex-wrap:wrap}
+.legend span:nth-child(2){color:#008574}
+#awatif-legend{color:#bd6b21}
+select{display:block;width:100%;margin-top:7px;padding:10px 8px;border:1px solid #cbd8df;border-radius:7px;background:#fbfcfd;color:#203648;font:inherit;font-size:13px}
+select:focus{outline:2px solid #168d80;outline-offset:2px}
+input[readonly]{background:#eaf3f2;color:#176658}
+#section-sketch{max-height:230px}
+#section-properties{overflow-wrap:anywhere}

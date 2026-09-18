@@ -1,0 +1,25 @@
+{
+  "name": "beam-deflection-checker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive simple-span beam deflection checker",
+  "scripts": {
+    "build": "node build.js",
+    "prestart": "npm run build",
+    "start": "node server.js",
+    "predev": "npm run build",
+    "dev": "node server.js",
+    "test": "npm run build && node beam.test.js && node sections.test.js && node awatif.test.mjs",
+    "test:browser": "npm run build && playwright test"
+  },
+  "dependencies": {
+    "awatif-fem": "1.0.1"
+  },
+  "overrides": {
+    "mathjs": "15.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "esbuild": "0.28.2"
+  }
+}

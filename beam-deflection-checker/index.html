@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beam deflection checker</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="comparison.css">
+  <script defer src="beam.js"></script>
+  <script defer src="sections.js"></script>
+  <script defer src="section-ui.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header><span class="eyebrow">STRUCTURAL TOOLS / SIMPLE SPAN</span><h1>Beam deflection checker</h1><p>Define the geometry, set the stiffness, and check the deflection.</p></header>
+    <div class="layout">
+      <form id="inputs" class="panel">
+        <h2><span>01</span> Geometry</h2>
+        <p class="hint">Support coordinates in feet. Loads act transverse to the beam in its bending plane.</p>
+        <div class="grid">
+          <label>Support A · x (ft)<input name="ax" type="number" step="any" value="0" required></label>
+          <label>Support A · y (ft)<input name="ay" type="number" step="any" value="0" required></label>
+          <label>Support B · x (ft)<input name="bx" type="number" step="any" value="20" required></label>
+          <label>Support B · y (ft)<input name="by" type="number" step="any" value="0" required></label>
+        </div>
+        <h2><span>02</span> Member stiffness</h2>
+        <label>Section type<select id="section-type"><option value="manual">Manual E and I</option><option value="ibeam">Aluminum I-beam</option><option value="angle">Aluminum equal-leg angle</option></select></label>
+        <div id="section-options" hidden>
+          <label>Starting dimensions<select id="section-preset"></select></label>
+          <p class="hint">Illustrative dimensions, not catalog sections. Properties use sharp-corner rectangles; extrusion fillets and tapers are omitted. Use manual I for verified catalog properties.</p>
+          <div class="grid">
+            <label>Overall depth, d (in)<input id="section-d" type="number" min="0" step="any"></label>
+            <label><span id="section-b-label">Flange width, b (in)</span><input id="section-b" type="number" min="0" step="any"></label>
+            <label>Web thickness (in)<input id="section-tw" type="number" min="0" step="any"></label>
+            <label>Flange thickness (in)<input id="section-tf" type="number" min="0" step="any"></label>
+            <label>Leg thickness (in)<input id="section-t" type="number" min="0" step="any"></label>
+          </div>
+          <label>Bending axis<select id="section-axis"></select></label>
+          <p id="angle-note" class="hint" hidden>Angles: principal-axis bending only. Orient the section so the selected axis is perpendicular to the load direction, with loading through the shear center and no torsion. Leg-aligned loading and coupled lateral deflection are not modeled.</p>
+          <svg id="section-sketch" viewBox="0 0 300 230" role="img" aria-label="Section outline and selected bending axis"></svg>
+          <p id="section-properties" class="hint"></p>
+          <p class="hint">Selecting aluminum sets E = 10,000 ksi, editable below. <a href="https://titanium.com/alloys/aluminum-alloys/aluminum-alloy-6061/" target="_blank" rel="noopener">6061 material reference</a>. Self-weight is not added automatically.</p>
+        </div>
+        <label>Elastic modulus, E (ksi)<input name="E" type="number" min="0.000001" step="any" value="29000" required></label>
+        <label>Moment of inertia, I (in⁴)<input name="I" type="number" min="0.000001" step="any" value="500" required></label>
+        <h2><span>03</span> Loading & limit</h2>
+        <label>Uniform load, w (kip/ft)<input name="w" type="number" min="0" step="any" value="1" required></label>
+        <label>Midspan point load, P (kip)<input name="P" type="number" min="0" step="any" value="0" required></label>
+        <label>Allowable deflection · L / denominator<input name="ratio" type="number" min="1" step="any" value="360" required></label>
+        <p class="hint">Use service loads. Include self-weight in the uniform load if required. L/360 is an editable starting value, not an automatically selected code limit.</p>
+        <button type="reset">Reset example</button>
+      </form>
+      <section class="results" aria-label="Calculation results">
+        <div id="error" class="panel error" role="alert" hidden></div>
+        <div id="output">
+          <div class="panel result-head" aria-live="polite"><div><span class="eyebrow">DEFLECTION CHECK</span><h2 id="status"></h2><p id="comparison"></p></div><strong id="utilization"></strong></div>
+          <div class="metrics"><div class="panel"><span>Maximum deflection</span><strong id="deflection"></strong><small>At midspan · downward</small></div><div class="panel"><span>Allowable deflection</span><strong id="allowable"></strong><small id="limit-label"></small></div><div class="panel"><span>Calculated span</span><strong id="span"></strong><small>Distance between supports</small></div></div>
+          <div class="panel cross-check" aria-live="polite"><span class="eyebrow">SECOND ANALYSIS / AWATIF FEM</span><h2 id="awatif-status">Preparing independent check…</h2><p id="awatif-message" class="hint"></p><div id="awatif-results" hidden><dl><dt>Awatif maximum deflection</dt><dd id="awatif-deflection"></dd><dt>Difference from formula</dt><dd id="awatif-difference"></dd><dt>Awatif deflection limit check</dt><dd id="awatif-limit"></dd><dt>Awatif reactions · A / B</dt><dd id="awatif-reactions"></dd></dl></div><p class="hint">20 beam elements · consistent uniform-load forces and moments · midspan point load. Agreement tolerance: 0.001% of formula deflection or 10⁻⁹ in, whichever is larger.</p></div>
+          <div class="panel plot"><h2>Deflected shape</h2><p class="hint">Simply supported · pin and roller · deformation exaggerated</p><svg id="diagram" viewBox="0 0 760 260" role="img" aria-label="Simply supported beam with its formula deflection curve and Awatif nodal results"></svg><div class="legend"><span>━ Undeformed beam</span><span>━ Formula</span><span id="awatif-legend" hidden>● Awatif nodes</span></div></div>
+          <div class="panel"><h2>Calculation details</h2><dl><dt>Uniform-load contribution</dt><dd id="uniform"></dd><dt>Point-load contribution</dt><dd id="point"></dd><dt>Reaction at each support</dt><dd id="reaction"></dd></dl><div class="formula">δw = 5wL⁴ / (384EI)<br>δP = PL³ / (48EI)<br>δmax = δw + δP &nbsp; · &nbsp; δallow = L / denominator</div><p class="hint">Calculations convert span to inches and uniform load to kip/in. Both loads are downward, so maximum deflection occurs at midspan.</p></div>
+        </div>
+        <aside class="assumptions"><strong>Model assumptions</strong><p>Prismatic, linear-elastic Euler–Bernoulli beam with constant EI and small deflections. This checks bending deflection only; it excludes shear deformation, strength, stability, vibration, creep, and connection behavior.</p></aside>
+      </section>
+    </div>
+    <footer>Based on beam-optimization.md · All calculations run locally in your browser.</footer>
+  </main>
+</body>
+</html>
