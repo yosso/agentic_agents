@@ -1,0 +1,69 @@
+# Drilled Pier Design
+## 1. Goal
+Size the embedment depth and obtain the maximum shear and moment on the drilled pier from the applied loading
+
+## 2. How it is currentlly done
+1. We obtain all of the load cases for each pier
+2. We use a program called Allpile to obtain the depth which will keep the pier deflection below the deflection criteria
+3. We use the same program to obtain the maximum shear and moment seen by the concrete
+4. We next take the depth and loading and place into an excel worksheet to track and create the data required to create the drawings.
+
+## 3. How will I do it?
+
+OpenSeesPy is the planned analysis engine for the pile / drilled pier / caisson workflow. Excel supplies the design inputs and receives the results. The VBA workbook serves as a reference for input organization and optional comparison cases; implementing the new workflow does not depend on repairing or porting its solver.
+
+This overview shows the main functions and the data each function produces. Ovals represent functions; rectangles represent their outputs. Detailed checks and depth iterations are handled inside the functions.
+
+```mermaid
+flowchart TD
+    LOADS(["read_rsa_loads()"])
+    LOAD_DATA["Pier loads<br/>Model, pier ID, and load cases / combinations"]
+    INPUTS(["read_design_inputs()"])
+    INPUT_DATA["Design inputs<br/>Structure-to-RSA-model/node and footing mapping,<br/>Excel soil parameters, pier assignments,<br/>pier diameters based on anchor bolt spacing,<br/>allowable-deflection table by diameter, and analysis settings"]
+    ASSEMBLE(["prepare_pier_designs()"])
+    PIER_DATA["Validated inputs for each pier<br/>RSA model ID, node ID, footing mark, loads,<br/>assigned soil profile, specified Excel diameter,<br/>allowable deflection matched by diameter, and analysis settings"]
+    SIZE(["size_embedment_depth()"])
+    ANALYSIS_DATA["Depth-sizing results for each pier<br/>Accepted depth, top deflection, allowable deflection,<br/>analysis responses, and success / failure status"]
+    FORCES(["summarize_pier_results()"])
+    RESULT_DATA["Pier results table<br/>Diameter, embedment depth, deflection, maximum shear and moment,<br/>governing cases and locations, source IDs, and status"]
+    EXPORT(["export_results_to_excel()"])
+    WORKBOOK["Updated Excel workbook<br/>Design tracking and drawing data"]
+
+    LOADS --> LOAD_DATA
+    INPUTS --> INPUT_DATA
+    LOAD_DATA --> ASSEMBLE
+    INPUT_DATA --> ASSEMBLE
+    ASSEMBLE --> PIER_DATA
+    PIER_DATA --> SIZE
+    SIZE --> ANALYSIS_DATA
+    ANALYSIS_DATA --> FORCES
+    FORCES --> RESULT_DATA
+    RESULT_DATA --> EXPORT
+    EXPORT --> WORKBOOK
+```
+
+`read_design_inputs()` reads each pier's specified diameter from the Excel workbook. These diameters are based on anchor bolt spacing. It also reads a separate workbook table mapping each drilled pier diameter to its allowable deflection. `prepare_pier_designs()` matches each pier's diameter to that table and validates that a unique allowable deflection is available with consistent units.
+
+`RSA NODE MAPPING!tblRSANodeMapping` maps each `STRUCTURE/EQUIPMENT` to its Robot model and support nodes, with one row per node. Structure labels match `ProjectStrTable[STRUCTURE/EQUIPMENT]`. It links `RSA MODEL ID` and `RSA NODE ID` to `FTG MARK`, with `RSA MODEL FILE` locating the source model. `prepare_pier_designs()` joins RSA reactions using the model/node pair, then joins the footing mark to `tblBoringAssignment`. Retain model, node, and load-case IDs through the results. Validate missing or conflicting assignments and model-file references. Where several supports share a footing mark, retain their separate cases; confirm whether that mark represents a shared design or a physical combined foundation before combining loads.
+
+The mapping sheet was prepared in `inputs/DVLP_FTG_MTL_QTY_with_RSA_mapping.xlsm` because the original workbook was locked by Excel. Actual model paths and node assignments remain to be entered.
+
+The input workbook is `inputs/DVLP_FTG_MTL_QTY.xlsm`. Pier assignments and diameters are in `INPUT TABLES!tblBoringAssignment`; soil profiles are in the three tables on `GEOTECH PARAMETERS`; diameter-based deflection criteria are in `DP WORKFLOW and GUIDELINES!B67:E75`. See the [input workbook mapping](workbook-review/input-workbook.md) for exact ranges and discrepancies requiring resolution, including the governing deflection column and minimum-depth precedence.
+
+`size_embedment_depth()` builds and runs the OpenSeesPy models using the specified diameter, checks top deflection against the Excel table value for the applicable load cases / combinations, and adjusts depth within the configured search limits. The diameter stays fixed during depth sizing. It returns the first passing trial depth or an explicit failure / unresolved status. `summarize_pier_results()` extracts the shear and moment envelopes for accepted designs and carries unsuccessful pier statuses into the results table.
+
+The depth search settings still need to be defined. Specify whether deflection is checked by direction or as a resultant.
+
+Section stiffness is calculated from the section code and its geometry/material inputs: `C` for circular sections and `R` for rectangular sections. EI is never a fixed user input in this workflow. Circular sections use the specified diameter; rectangular sections require width and depth. The OpenSeesPy implementation must define and validate how the calculated section stiffness is updated during analysis.
+
+Before implementing `size_embedment_depth()` and `summarize_pier_results()`, research and validate how OpenSeesPy provides the required outputs for the selected pier model and element types:
+
+- Select and validate the pier elements, soil interaction model, section stiffness assumptions, and boundary conditions against the intended loading and soil profiles.
+- How to retrieve top-of-pier displacement and identify the relevant directions.
+- How to retrieve shear and moment along the pier, including output component order, sign conventions, coordinate systems, and response locations.
+- How output values relate to the model's unit system and individual load cases / combinations.
+- How to identify analysis success, nonconvergence, and incomplete results.
+
+The output of this research will be a documented mapping from OpenSeesPy responses to the workflow's result fields, supported by a small benchmark with independently known deflection, shear, and moment. The analysis-output fields shown above are proposed requirements until this validation is complete.
+
+The existing VBA workbook, `inputs/TEST_SUB_LAT_PILE_PY.xlsm`, provides an optional comparison case and a six-column response layout. See the [workbook inspection](workbook-review/inspection.md) for its input/output mapping and extracted-code findings. Resolve its unit, argument, convergence, and summary-formula issues only if its results will be used for comparison. Begin OpenSeesPy validation with an independently known benchmark, then a representative layered-soil pier case with a trusted comparison solution.
