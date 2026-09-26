@@ -11,6 +11,7 @@ from tkinter import ttk, filedialog, messagebox
 import config
 from data import read_mapping, parse_cases, display_reaction, assess_group, controlling_combinations
 from pier_designs import prepare_pier_designs, Issue
+from preparation_report import soil_report_rows, markdown_report
 
 
 class Viewer(tk.Tk):
@@ -105,10 +106,25 @@ class Viewer(tk.Tk):
         prep_controls.pack(fill='x')
         ttk.Button(prep_controls, text='Prepare & validate inputs', command=self.prepare).pack(side='left')
         ttk.Button(prep_controls, text='Export preparation JSON…', command=self.export_preparation).pack(side='left', padx=8)
-        self.preparation_status = tk.StringVar(value='Read Robot combinations, then prepare the saved workbook inputs. OpenSeesPy is not run.')
+        ttk.Button(prep_controls, text='Export readable report…', command=self.export_preparation_report).pack(side='left')
+        self.preparation_status = tk.StringVar(value='Prepare the saved Excel soil/pier inputs now; Robot reactions can be added after extraction. OpenSeesPy is not run.')
         ttk.Label(prepare_frame, textvariable=self.preparation_status, wraplength=1150).pack(anchor='w', pady=8)
-        self.prepared = self.grid_table(prepare_frame, ['Footing', 'Boring', 'Soil table', 'Layers', 'Diameter (ft)', 'Minimum depth (ft)', 'Water depth (ft)', 'Allowable (in)', 'Combinations/node rows'])
-        self.validation = self.grid_table(prepare_frame, ['Severity', 'Footing', 'Source', 'Finding'])
+        prep_tabs = ttk.Notebook(prepare_frame)
+        prep_tabs.pack(fill='both', expand=True)
+        summary_panel = ttk.Frame(prep_tabs)
+        soil_panel = ttk.Frame(prep_tabs)
+        finding_panel = ttk.Frame(prep_tabs)
+        prep_tabs.add(summary_panel, text='Assigned pier inputs')
+        prep_tabs.add(soil_panel, text='Soil parameters & source cells')
+        prep_tabs.add(finding_panel, text='Validation findings')
+        self.prepared = self.grid_table(summary_panel, ['Footing', 'Boring', 'Soil table', 'Layers', 'Diameter (ft)', 'Minimum depth (ft)', 'Water depth (ft)', 'Allowable (in)', 'Tip limit (in)', 'Non-recoverable (in)', 'Combinations/node rows'])
+        ttk.Label(soil_panel, text='One row per layer parameter. Source units are not converted. UNCONFIRMED units and unavailable values require review.', wraplength=1150).pack(anchor='w', pady=5)
+        self.soil_values = self.grid_table(soil_panel, ['Footings', 'Boring', 'Soil table', 'Layer', 'Parameter', 'Source value', 'Parsed value', 'Units', 'Source cell', 'Finding'])
+        self.soil_values.column('Parameter', width=170)
+        self.soil_values.column('Source cell', width=250)
+        self.soil_values.column('Finding', width=450)
+        self.soil_values.tag_configure('review', background='#fff0d0')
+        self.validation = self.grid_table(finding_panel, ['Severity', 'Footing', 'Source', 'Finding'])
         self.validation.column('Source', width=270)
         self.validation.column('Finding', width=800)
         self.validation.tag_configure('error', background='#ffe0df', foreground='#8b1616')
@@ -249,6 +265,7 @@ class Viewer(tk.Tk):
     def clear_preparation(self):
         self.preparation = None
         self.prepared.delete(*self.prepared.get_children())
+        self.soil_values.delete(*self.soil_values.get_children())
         self.validation.delete(*self.validation.get_children())
         self.preparation_status.set('Inputs not yet prepared. OpenSeesPy is not run.')
 
@@ -270,12 +287,15 @@ class Viewer(tk.Tk):
                 for warning in self.extraction.get('warnings', []):
                     report.issues.append(Issue('WARNING', '', 'Robot extraction', warning))
             self.preparation = report
+            for row in soil_report_rows(report):
+                self.soil_values.insert('', 'end', values=row, tags=('review',) if row[-1] != 'Read' else ())
             profiles = {p.table_name: p for p in report.soil_profiles}
             for pier in report.piers:
                 profile = profiles.get(pier.soil_table)
                 self.prepared.insert('', 'end', values=[pier.footing, pier.boring_id, pier.soil_table or 'UNRESOLVED',
                     len(profile.layers) if profile else 0, pier.diameter_ft, pier.minimum_embedment_ft,
-                    pier.water_table_depth_ft, pier.allowable_deflection_in, len(pier.reactions)])
+                    pier.water_table_depth_ft, pier.allowable_deflection_in, pier.diameter_criteria.get('tip_deflection'),
+                    pier.diameter_criteria.get('nonrecoverable_deflection'), len(pier.reactions)])
             for issue in report.issues:
                 self.validation.insert('', 'end', values=[issue.severity, issue.footing, issue.source, issue.message],
                     tags=('error',) if issue.severity == 'ERROR' else ())
@@ -293,6 +313,17 @@ class Viewer(tk.Tk):
             try:
                 Path(filename).write_text(json.dumps(self.preparation.to_dict(), indent=2, allow_nan=False), encoding='utf-8')
             except (OSError, ValueError) as error:
+                messagebox.showerror('Export failed', str(error))
+
+    def export_preparation_report(self):
+        if self.preparation is None:
+            messagebox.showinfo('Prepare inputs', 'Prepare and validate inputs first.')
+            return
+        filename = filedialog.asksaveasfilename(defaultextension='.md', filetypes=[('Markdown report', '*.md')])
+        if filename:
+            try:
+                Path(filename).write_text(markdown_report(self.preparation), encoding='utf-8')
+            except OSError as error:
                 messagebox.showerror('Export failed', str(error))
 
     def visible_rows(self):

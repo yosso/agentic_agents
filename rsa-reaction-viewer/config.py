@@ -17,6 +17,9 @@ ASSIGNMENT_TABLE_NAME = 'tblBoringAssignment'
 SOIL_BORING_IDS = {}
 # Fill only after confirming the workbook's units. Values remain in source units.
 SOIL_UNITS = {}
+DEFLECTION_TABLE_NAME = 'tblDEFLECTION_SIZE'
+# Confirmed allowable top-of-pier deflection criterion.
+ALLOWABLE_DEFLECTION_COLUMN = 'NON-RECOVERABLE (IN)'
 
 def find_robot_api():
     installations = Path('C:/Program Files/Autodesk').glob(

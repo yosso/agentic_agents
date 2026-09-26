@@ -23,6 +23,7 @@ class SoilLayer:
     source_row: int
     properties: dict
     cells: dict
+    raw_properties: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -45,6 +46,7 @@ class PierDesign:
     allowable_deflection_in: float | None
     reactions: list[dict]
     source_cells: dict
+    diameter_criteria: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -199,7 +201,7 @@ def prepare_pier_designs(workbook_path, reactions=(), *, boring_ids=None, soil_u
                         previous_end = end
                     if properties.get('friction_angle') is not None and properties['friction_angle'] >= 90:
                         issue(cells['friction_angle'], 'Friction angle must be less than 90 degrees.')
-                    profile.layers.append(SoilLayer(row, properties, cells))
+                    profile.layers.append(SoilLayer(row, properties, cells, dict(data)))
                 if not profile.layers:
                     issue(table.name, 'Soil profile has no populated layers.')
                 result.soil_profiles.append(profile)
@@ -218,6 +220,22 @@ def prepare_pier_designs(workbook_path, reactions=(), *, boring_ids=None, soil_u
         issue(soil_sheet, 'Cohesion header states KSF; confirm that values and selected unit agree. Confirm ultimate/factored parameter selection before building soil springs.', severity='WARNING')
 
         assignment_sheet, assignment_table = config.ASSIGNMENT_SHEET_NAME, config.ASSIGNMENT_TABLE_NAME
+        criteria_fields = {'DIA (FT)': 'diameter', 'TIP DEF (IN)': 'tip_deflection',
+                           'NON-RECOVERABLE (IN)': 'nonrecoverable_deflection', 'MIN. EMBED DEPTH': 'minimum_depth'}
+        criteria_tables = [(s.title, t.name) for s in values for t in s.tables.values()
+                           if t.name.casefold() == config.DEFLECTION_TABLE_NAME.casefold()]
+        criteria_rows = []
+        if len(criteria_tables) != 1:
+            issue(config.DEFLECTION_TABLE_NAME, 'Exactly one diameter-criteria table is required.')
+        else:
+            criteria_sheet, criteria_table = criteria_tables[0]
+            for _, row, sources in table_rows(criteria_sheet, criteria_table, criteria_fields):
+                parsed = {key: number(value, sources[key], positive=True) for key, value in row.items()}
+                criteria_rows.append((parsed, sources))
+        selected_criterion = criteria_fields.get(normalize(config.ALLOWABLE_DEFLECTION_COLUMN))
+        if selected_criterion not in ('tip_deflection', 'nonrecoverable_deflection'):
+            selected_criterion = None
+            issue(config.DEFLECTION_TABLE_NAME, 'Select TIP DEF (IN) or NON-RECOVERABLE (IN) as the allowable-deflection criterion; both are reported.')
         if assignment_sheet not in values or assignment_table not in values[assignment_sheet].tables:
             issue(assignment_table, 'Footing-to-boring assignment table not found.')
         else:
@@ -248,9 +266,31 @@ def prepare_pier_designs(workbook_path, reactions=(), *, boring_ids=None, soil_u
                             issue('RSA reactions', f'Invalid {name} at node {load.get("node")}, combination {load.get("case")}.', mark)
                 numeric = {name: number(data.get(name), cells.get(name, assignment_table), mark,
                                        positive=name in ('diameter', 'minimum_depth', 'allowable'))
-                           for name in ['diameter', 'minimum_depth', 'water_depth', 'allowable']}
+                           for name in ['diameter', 'water_depth']}
+                matched = [(r, c) for r, c in criteria_rows if numeric['diameter'] is not None
+                           and r.get('diameter') is not None and math.isclose(r['diameter'], numeric['diameter'], rel_tol=0, abs_tol=1e-8)]
+                criteria = {}
+                numeric.update(minimum_depth=None, allowable=None)
+                if len(matched) != 1:
+                    issue(cells.get('diameter', assignment_table), 'Diameter must match exactly one row in tblDEFLECTION_SIZE; no interpolation used.', mark)
+                else:
+                    matched_values, matched_cells = matched[0]
+                    criteria = dict(matched_values, source_cells=matched_cells, table=config.DEFLECTION_TABLE_NAME,
+                                    allowable_column=config.ALLOWABLE_DEFLECTION_COLUMN)
+                    numeric['minimum_depth'] = matched_values.get('minimum_depth')
+                    numeric['allowable'] = matched_values.get(selected_criterion) if selected_criterion else None
+                    for key, target in [('minimum_depth', 'minimum_depth'), ('allowable', selected_criterion)]:
+                        cells['assignment_' + key] = cells.get(key, assignment_table)
+                        if target:
+                            cells[key] = matched_cells.get(target, config.DEFLECTION_TABLE_NAME)
+                        else:
+                            cells[key] = config.DEFLECTION_TABLE_NAME + ' / criterion not selected'
+                        if data.get(key) not in (None, '') and numeric[key] is not None:
+                            old = number(data[key], cells['assignment_' + key], mark, positive=True)
+                            if old is not None and not math.isclose(old, numeric[key], rel_tol=0, abs_tol=1e-8):
+                                issue(cells['assignment_' + key], f'Assignment {old} differs from diameter-table {numeric[key]}; using {cells[key]}.', mark, severity='WARNING')
                 result.piers.append(PierDesign(mark, boring, profile.table_name if profile else None,
-                    numeric['diameter'], numeric['minimum_depth'], numeric['water_depth'], numeric['allowable'], loads, cells))
+                    numeric['diameter'], numeric['minimum_depth'], numeric['water_depth'], numeric['allowable'], loads, cells, criteria))
             for load in reactions:
                 if normalize(load.get('mark')) not in seen:
                     issue(assignment_table, 'Extracted footing has no design assignment.', str(load.get('mark', '')))
@@ -258,7 +298,6 @@ def prepare_pier_designs(workbook_path, reactions=(), *, boring_ids=None, soil_u
             issue(assignment_table, 'No pier designs could be assembled.')
         if formula_cells:
             issue('Excel saved formula results', f'Used {len(formula_cells)} cached formula values. Recalculate/save Excel before preparation; this reader does not evaluate VBA/formulas.', severity='WARNING')
-        issue(assignment_table, 'Allowable deflection is the assignment-table value pending confirmation of the diameter-table column and override precedence.', severity='WARNING')
         return result
     finally:
         values.close()

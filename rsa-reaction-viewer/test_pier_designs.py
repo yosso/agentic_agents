@@ -4,6 +4,7 @@ from pathlib import Path
 from openpyxl import Workbook
 from openpyxl.worksheet.table import Table
 from pier_designs import prepare_pier_designs, SOIL_FIELDS, ASSIGNMENT_FIELDS
+from preparation_report import soil_report_rows, markdown_report
 
 
 class PreparationTests(unittest.TestCase):
@@ -21,6 +22,10 @@ class PreparationTests(unittest.TestCase):
             sheet.append(list(ASSIGNMENT_FIELDS))
             sheet.append(['A', assignment, 2.5, 5, 0, 0.3])
             sheet.add_table(Table(displayName='tblBoringAssignment', ref='A1:F2'))
+            criteria = book.create_sheet('DP WORKFLOW and GUIDELINES')
+            criteria.append(['DIA (FT)', 'TIP DEF (IN)', 'NON-RECOVERABLE (IN)', 'MIN. EMBED DEPTH'])
+            criteria.append([2.5, 0.9, 0.297, 10])
+            criteria.add_table(Table(displayName='tblDEFLECTION_SIZE', ref='A1:D2'))
             book.save(path)
             book.close()
             before = path.read_bytes()
@@ -56,6 +61,32 @@ class PreparationTests(unittest.TestCase):
         result = self.run_fixture(boring=3, assignment='SB03')
         self.assertEqual(result.piers[0].soil_table, 'tblSOIL_BORING_03')
         self.assertFalse(any('Boring ID mismatch' in i.message or 'no unique soil table' in i.message for i in result.issues))
+
+    def test_report_preserves_source_missing_values_and_findings(self):
+        result = self.run_fixture()
+        rows = soil_report_rows(result)
+        self.assertEqual(len(rows), 12)
+        cyclic = next(r for r in rows if r[4] == 'k_cyclic')
+        self.assertEqual(cyclic[5], '-')
+        self.assertEqual(cyclic[6], 'Unavailable')
+        self.assertEqual(cyclic[8], 'GEOTECH PARAMETERS!I3')
+        self.assertIn('UNCONFIRMED', cyclic)
+        report = markdown_report(result)
+        self.assertIn('tblSOIL_BORING_03', report)
+        self.assertIn('INPUT TABLES!C2', report)
+        self.assertIn('No extracted load combinations', report)
+
+    def test_diameter_table_lookup_preserves_both_limits(self):
+        result = self.run_fixture()
+        pier = result.piers[0]
+        self.assertEqual(pier.minimum_embedment_ft, 10)
+        self.assertEqual(pier.diameter_criteria['tip_deflection'], 0.9)
+        self.assertEqual(pier.diameter_criteria['nonrecoverable_deflection'], 0.297)
+        self.assertEqual(pier.allowable_deflection_in, 0.297)
+        self.assertEqual(pier.source_cells['allowable'], 'DP WORKFLOW and GUIDELINES!C2')
+        self.assertFalse(any('Select TIP DEF' in i.message for i in result.issues))
+        self.assertEqual(pier.source_cells['minimum_depth'], 'DP WORKFLOW and GUIDELINES!D2')
+        self.assertTrue(any('Assignment 5.0 differs' in i.message for i in result.issues))
 
 
 if __name__ == '__main__':
