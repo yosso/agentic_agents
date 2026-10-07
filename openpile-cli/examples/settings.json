@@ -1,0 +1,33 @@
+{
+  "footing": "DEMO",
+  "reaction": {
+    "model": "synthetic.rtd",
+    "group": "DEMO",
+    "node": 1,
+    "case": 101
+  },
+  "plane": "X",
+  "load_signs": {
+    "lateral": 1,
+    "moment": 1,
+    "axial": -1
+  },
+  "embedment_ft": 30,
+  "mesh_size_ft": 1,
+  "max_iterations": 100,
+  "boundary": "free_head_axially_fixed_tip",
+  "material": {
+    "E_kpa": 30000000,
+    "unit_weight_kn_m3": 24,
+    "poisson_ratio": 0.2
+  },
+  "soil_models": {
+    "DEMO CLAY": {
+      "model": "API_clay",
+      "kind": "static",
+      "cohesion": "cohesion_ultimate",
+      "strain": "e50",
+      "J": 0.5
+    }
+  }
+}

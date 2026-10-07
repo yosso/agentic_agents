@@ -81,7 +81,7 @@ Each extracted row retains the footing mark, full model path, group, node, combi
 
 Global Z is treated as vertical; positive Fz denotes compression and negative Fz denotes uplift. Each check identifies its controlling combination, node, model/group, and all six coincident reactions. Different checks may be controlled by different combinations. Exact ties show their count and one deterministic source; absent compression/uplift is reported as “None found.” These are load extremes, not proof of the governing pier deflection or capacity condition. All extracted combination rows are retained for input preparation and subsequent analysis.
 
-`prepare_pier_designs()` joins each footing callout to `INPUT TABLES!tblBoringAssignment`, which supplies its boring, anchor-pattern-based diameter, minimum embedment, water-table depth, and allowable deflection. Soil layers come from the `tblSOIL_BORING_*` tables on `GEOTECH PARAMETERS`: `_03` identifies boring 3 (`SB3`), and the BORING/NUMBER cell above the table is cross-checked. Disagreements, missing/ambiguous assignments, invalid layers, missing numeric inputs, and unconfirmed soil units are reported with source locations. The viewer carries extraction and quantity errors into this validation report.
+`prepare_pier_designs()` joins each footing callout to `INPUT TABLES!tblBoringAssignment`, which supplies its boring, anchor-pattern-based diameter, minimum embedment, water-table depth, and allowable deflection. Soil layers come from the `tblSOIL_BORING_*` tables on `GEOTECH PARAMETERS`: `_03` identifies boring 3 (`SB3`), and the BORING/NUMBER cell above the table is cross-checked. Disagreements, missing/ambiguous assignments, invalid layers, missing numeric inputs, and soil schema mismatches are reported with source locations. The viewer carries extraction and quantity errors into this validation report.
 
 `prepare_pier_designs()` reads the named table `tblDEFLECTION_SIZE` on `DP WORKFLOW and GUIDELINES` and matches the fixed pier diameter to exactly one row. That row supplies minimum embedment depth and both tip/non-recoverable deflection limits, with source cells retained in the report. Assignment-table differences are flagged; the diameter table supplies the minimum depth. The confirmed allowable top-of-pier deflection is `NON-RECOVERABLE (IN)` from the matched diameter row. `TIP DEF (IN)` is retained for reference. Missing or duplicate diameter matches block validation.
 
@@ -102,3 +102,59 @@ Before implementing `size_embedment_depth()` and `summarize_pier_results()`, res
 The output of this research will be a documented mapping from OpenSeesPy responses to the workflow's result fields, supported by a small benchmark with independently known deflection, shear, and moment. The analysis-output fields shown above are proposed requirements until this validation is complete.
 
 The existing VBA workbook, `inputs/TEST_SUB_LAT_PILE_PY.xlsm`, provides an optional comparison case and a six-column response layout. See the [workbook inspection](workbook-review/inspection.md) for its input/output mapping and extracted-code findings. Resolve its unit, argument, convergence, and summary-formula issues only if its results will be used for comparison. Begin OpenSeesPy validation with an independently known benchmark, then a representative layered-soil pier case with a trusted comparison solution.
+
+
+### Soil table schema
+
+Each `GEOTECH PARAMETERS!tblSOIL_BORING_*` table has a header row followed by one row per layer, ordered from the first layer downward. The table suffix identifies the boring. The confirmed 12-column layout is:
+
+| Column | Parameter | Units | Prepared field |
+| --- | --- | --- | --- |
+| 1 | Starting depth | ft | `start` |
+| 2 | Ending depth | ft | `end` |
+| 3 | Soil model (clay, rock, sand, etc.) | None | `model` |
+| 4 | Soil density | lb/ft^3 | `density` |
+| 5 | Ultimate cohesion | kip/ft^2 | `cohesion_ultimate` |
+| 6 | Factored cohesion | kip/ft^2 | `cohesion_factored` |
+| 7 | Friction angle for non-cohesive soils | degrees | `friction_angle` |
+| 8 | Static modulus of subgrade reaction | lb/in^3 | `k_static` |
+| 9 | Cyclic modulus of subgrade reaction | lb/in^3 | `k_cyclic` |
+| 10 | Factored static modulus (`fKh`) | lb/in^3 | `k_static_factored` |
+| 11 | Epsilon 50 | unitless | `e50` |
+| 12 | Factored epsilon 50 | unitless | `e50_factored` |
+
+Epsilon 50 is the soil strain corresponding to 50% of the maximum principal stress difference in an undrained compression laboratory test on cohesive soils. Values are retained as supplied, without percentage or unit conversion. Extraction maps headers to fields and retains raw values and source cells. Missing cyclic values remain unavailable; applicability must be resolved before analysis.
+
+START and END are depths in feet measured positive downward from the top of the hole (zero). The first data row starts at zero; each subsequent row is a deeper layer whose START equals the preceding row's END. END must exceed START. Negative depths, a nonzero first START, and gaps or overlaps are reported with source cells. Rows remain in worksheet order.
+
+The saved tables match the corrected 12-column schema. Column 10 (`fKh`) supplies the factored static modulus; no factored cyclic modulus is required. The descriptive header `FACTORED MODULUS OF SUBGRADE REACTION (STATIC)` is also accepted for that field. Missing fields are reported explicitly. The workbook is not modified by extraction.
+
+
+### Python soil parameter type
+
+`rsa-reaction-viewer/soil_parameters.py` defines `SoilParameters`, a dataclass with one named, typed field for each of the 12 columns above. Each `SoilLayer.properties` holds this object; the layer also retains `source_row`, `cells`, and `raw_properties` for traceability. Each boring's `SoilProfile.layers` preserves worksheet order.
+
+```python
+layer = prepared.soil_profiles[0].layers[0]
+soil = layer.properties
+start_depth_ft = soil.start
+static_modulus_lb_in3 = soil.k_static
+factored_static_modulus_lb_in3 = soil.k_static_factored
+source_cell = layer.cells["k_static_factored"]
+```
+
+Numeric fields can be `None` when missing or invalid, so all findings can still be reported. A missing model is an empty string. The class is immutable and takes keyword arguments to avoid mixing up similarly named parameters. Extraction performs validation; creating an instance alone does not establish validity. JSON exports retain the existing `properties` object and field names, and the report retains the same source values and units.
+
+
+### OpenPile single-pier CLI
+
+The [OpenPile CLI](openpile-cli/README.md) consumes the prepared-input JSON and a separate settings file. `validate` checks the selected footing, exact node/combination, source units, layer coverage, material properties, and explicit soil-model/load-direction choices. Its output is a traceable set of converted inputs and validation findings. `run` uses those checks before building a solid circular pier and running one 2D analysis with API clay or API sand springs. Its output includes displacement, force, and reaction CSVs, a solver log, and a JSON summary.
+
+The settings select a trial embedment, one lateral plane, material stiffness, constitutive models, and signed mapping of the coincident RSA reaction vector. Soil depths are converted to negative elevations. This first version uses a free head and an axial tip restraint. It does not size embedment automatically or analyze torsion or axial soil capacity. Loaded displacement is reported separately from the workbook's non-recoverable deflection limit; a complete pier acceptance check remains future work.
+
+
+### OpenSeesPy alternative CLI
+
+The [OpenSeesPy CLI](openseespy-cli/README.md) provides the same `validate`/`run` workflow for a single selected pier and reaction vector. It shares input validation and unit conversion with OpenPile, then builds a 2D elastic beam with tributary-length-scaled PySimple1 springs. Extra settings define load increments, convergence tolerance, water unit weight, drag ratio, and Linear/PDelta transformation. The first version supports monotonic static clay/sand response only.
+
+Outputs include traceable analysis inputs, spring parameters, displacements, local element end forces, support reactions, convergence history and a summary. The solver checks the return code at every load step and requires the full target load. The two libraries use different spring backbones; agreement is a comparison to investigate rather than an assumed acceptance criterion. The non-recoverable deflection and complete pier design checks remain unresolved.

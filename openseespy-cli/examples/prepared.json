@@ -1,0 +1,95 @@
+{
+  "workbook": "SYNTHETIC EXAMPLE - not project design data",
+  "reaction_units": {
+    "force": "N",
+    "moment": "N-m"
+  },
+  "issues": [],
+  "piers": [
+    {
+      "footing": "DEMO",
+      "soil_table": "tblSOIL_BORING_01",
+      "diameter_ft": 3,
+      "minimum_embedment_ft": 10,
+      "water_table_depth_ft": 5,
+      "allowable_deflection_in": 0.3564,
+      "reactions": [
+        {
+          "model": "synthetic.rtd",
+          "group": "DEMO",
+          "node": 1,
+          "case": 101,
+          "mark": "DEMO",
+          "case_name": "Synthetic lateral example",
+          "FX": 1000,
+          "FY": 0,
+          "FZ": 1000,
+          "MX": 0,
+          "MY": 1000,
+          "MZ": 0
+        }
+      ]
+    }
+  ],
+  "soil_profiles": [
+    {
+      "table_name": "tblSOIL_BORING_01",
+      "boring_id": "SB1",
+      "units": {
+        "depth": "ft",
+        "density": "lb/ft^3",
+        "cohesion": "kip/ft^2",
+        "friction_angle": "degrees",
+        "subgrade_modulus": "lb/in^3",
+        "strain": "unitless"
+      },
+      "layers": [
+        {
+          "source_row": 1,
+          "properties": {
+            "start": 0,
+            "end": 40,
+            "model": "DEMO CLAY",
+            "density": 120,
+            "cohesion_ultimate": 1,
+            "cohesion_factored": 0.67,
+            "friction_angle": 0,
+            "k_static": 100,
+            "k_cyclic": null,
+            "k_static_factored": 67,
+            "e50": 0.01,
+            "e50_factored": 0.015
+          },
+          "cells": {
+            "start": "SYNTHETIC:start",
+            "end": "SYNTHETIC:end",
+            "model": "SYNTHETIC:model",
+            "density": "SYNTHETIC:density",
+            "cohesion_ultimate": "SYNTHETIC:cohesion_ultimate",
+            "cohesion_factored": "SYNTHETIC:cohesion_factored",
+            "friction_angle": "SYNTHETIC:friction_angle",
+            "k_static": "SYNTHETIC:k_static",
+            "k_cyclic": "SYNTHETIC:k_cyclic",
+            "k_static_factored": "SYNTHETIC:k_static_factored",
+            "e50": "SYNTHETIC:e50",
+            "e50_factored": "SYNTHETIC:e50_factored"
+          },
+          "raw_properties": {
+            "start": 0,
+            "end": 40,
+            "model": "DEMO CLAY",
+            "density": 120,
+            "cohesion_ultimate": 1,
+            "cohesion_factored": 0.67,
+            "friction_angle": 0,
+            "k_static": 100,
+            "k_cyclic": null,
+            "k_static_factored": 67,
+            "e50": 0.01,
+            "e50_factored": 0.015
+          }
+        }
+      ]
+    }
+  ]
+}

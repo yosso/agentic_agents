@@ -4,7 +4,20 @@ A small Windows desktop app displaying Robot group node quantities and individua
 
 ## Start
 
-Double-click `start.bat`, or run `python app.py` from this folder. Requires Python with Tkinter and openpyxl, Windows PowerShell, and a licensed installation of Autodesk Robot. If needed, install Python dependencies with `python -m pip install -r requirements.txt`.
+Requires Python with Tkinter, Windows PowerShell, and a licensed installation of Autodesk Robot. Set up the viewer's virtual environment once, from the repository root:
+
+```powershell
+python -m venv rsa-reaction-viewer/.venv
+rsa-reaction-viewer/.venv/Scripts/python -m pip install -r rsa-reaction-viewer/requirements.txt
+```
+
+Double-click `start.bat` in this folder, or run the following from the repository root. No environment activation is needed:
+
+```powershell
+rsa-reaction-viewer/.venv/Scripts/python rsa-reaction-viewer/app.py
+```
+
+In VS Code, use **Ctrl+Shift+P → Python: Select Interpreter → Enter interpreter path** and select `rsa-reaction-viewer/.venv/Scripts/python.exe` in this repository.
 
 1. Save workbook edits in Excel. The app reads the saved file, not unsaved Excel cells.
 2. Select the workbook and click **Load mapping**.
@@ -51,7 +64,7 @@ After reading combinations, use **Prepare pier designs → Prepare & validate in
 
 The report retains source cells, raw soil properties, both ultimate/factored parameters, saved formula values, and all six reaction components for every extracted node/combination. It checks required fields, numeric values, layer continuity, missing/ambiguous boring assignments, soil-unit declarations, and missing reactions. Extraction errors and quantity discrepancies remain blockers in the app. Blank water depth is not interpreted as zero; missing inputs require correction or an explicit future policy. Cyclic modulus `-` is retained as unavailable, not zero.
 
-Set confirmed soil units/conventions in `SOIL_UNITS` before accepting the input check. No soil-unit conversions, spring selection, reinforcement/material assumptions, or OpenSeesPy analysis are performed. `input_valid` reports the implemented preparation checks only; exported `solver_ready` remains false until model and solver validation are implemented. The named `tblDEFLECTION_SIZE` table supplies minimum embedment by exact diameter match. Both deflection columns and source cells are reported. `ALLOWABLE_DEFLECTION_COLUMN` is confirmed as `NON-RECOVERABLE (IN)`; the matched value is used as the allowable top-of-pier deflection. Assignment differences are flagged.
+Confirmed source units are recorded in `SOIL_UNITS`: depths in ft, density in lb/ft^3, cohesion in kip/ft^2, subgrade moduli in lb/in^3, friction angle in degrees, and prepared strain as unitless fractions. Plain numeric E50 and FE50 worksheet values are percentage points and are divided by 100 (1.5 becomes 0.015); Excel percentage-formatted cells already store fractions and are retained as stored. Raw source values remain available in the export and readable report. Reprepare and re-export existing inputs to apply this conversion. The confirmed 12-field schema reads static modulus, cyclic modulus, factored static modulus (`fKh`), epsilon 50, and factored epsilon 50 in columns 8 through 12. No factored cyclic modulus is required. Depths increase downward from zero at the top of the hole. The first layer starts at zero, each END exceeds START, and each following START equals the preceding END; negative depths and discontinuities are flagged. Apart from the E50/FE50 percentage-to-fraction conversion, no soil-unit conversions, spring selection, reinforcement/material assumptions, or OpenSeesPy analysis are performed. `input_valid` reports the implemented preparation checks only; exported `solver_ready` remains false until model and solver validation are implemented. The named `tblDEFLECTION_SIZE` table supplies minimum embedment by exact diameter match. Both deflection columns and source cells are reported. `ALLOWABLE_DEFLECTION_COLUMN` is confirmed as `NON-RECOVERABLE (IN)`; the matched value is used as the allowable top-of-pier deflection. Assignment differences are flagged.
 
 Export the preparation JSON from the tab, or run `python pier_designs.py --reactions live-results.json --output prepared-inputs.json`. The JSON contains pier records, soil profiles, and source-specific findings. The workbook is never saved by this reader.
 

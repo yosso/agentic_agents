@@ -15,8 +15,11 @@ ASSIGNMENT_SHEET_NAME = 'INPUT TABLES'
 ASSIGNMENT_TABLE_NAME = 'tblBoringAssignment'
 # Optional expected IDs, checked against the numeric table suffix (not overrides).
 SOIL_BORING_IDS = {}
-# Fill only after confirming the workbook's units. Values remain in source units.
-SOIL_UNITS = {}
+# Prepared units; E50/FE50 percentage points are converted to unitless fractions.
+SOIL_UNITS = {
+    'depth': 'ft', 'density': 'lb/ft^3', 'cohesion': 'kip/ft^2',
+    'friction_angle': 'degrees', 'subgrade_modulus': 'lb/in^3', 'strain': 'unitless',
+}
 DEFLECTION_TABLE_NAME = 'tblDEFLECTION_SIZE'
 # Confirmed allowable top-of-pier deflection criterion.
 ALLOWABLE_DEFLECTION_COLUMN = 'NON-RECOVERABLE (IN)'

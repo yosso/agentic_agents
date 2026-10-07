@@ -8,16 +8,27 @@ from preparation_report import soil_report_rows, markdown_report
 
 
 class PreparationTests(unittest.TestCase):
-    def run_fixture(self, boring='SB3', end=10, reactions=None, assignment='SB3'):
+    def run_fixture(self, boring='SB3', end=10, reactions=None, assignment='SB3', descriptive_header=False, soil_units=None, start=0, next_start=None, percentage_cells=False):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / 'inputs.xlsx'
             book = Workbook()
             soil = book.active
             soil.title = 'GEOTECH PARAMETERS'
             soil.append(['NUMBER', boring])
-            soil.append(list(SOIL_FIELDS))
-            soil.append([0, end, 'SOFT CLAY', 125, 1, 0.66, 0, 200, '-', 133, 1, 1.5])
-            soil.add_table(Table(displayName='tblSOIL_BORING_03', ref='A2:L3'))
+            headers = list(SOIL_FIELDS)
+            row = [start, end, 'SOFT CLAY', 125, 1, 0.66, 0, 200, '-', 133, 1, 1.5]
+            if descriptive_header:
+                headers[9] = 'FACTORED MODULUS OF SUBGRADE REACTION (STATIC)'
+            soil.append(headers)
+            soil.append(row)
+            if percentage_cells:
+                soil['K3'] = 0.01
+                soil['L3'] = 0.015
+                soil['K3'].number_format = '0.0%'
+                soil['L3'].number_format = '0.0%'
+            if next_start is not None:
+                soil.append([next_start, 20, *row[2:]])
+            soil.add_table(Table(displayName='tblSOIL_BORING_03', ref='A2:L4' if next_start is not None else 'A2:L3'))
             sheet = book.create_sheet('INPUT TABLES')
             sheet.append(list(ASSIGNMENT_FIELDS))
             sheet.append(['A', assignment, 2.5, 5, 0, 0.3])
@@ -29,7 +40,7 @@ class PreparationTests(unittest.TestCase):
             book.save(path)
             book.close()
             before = path.read_bytes()
-            result = prepare_pier_designs(path, reactions or [], soil_units={})
+            result = prepare_pier_designs(path, reactions or [], soil_units={} if soil_units is None else soil_units)
             self.assertEqual(before, path.read_bytes())
             return result
 
@@ -41,7 +52,7 @@ class PreparationTests(unittest.TestCase):
         self.assertEqual(result.piers[0].soil_table, 'tblSOIL_BORING_03')
         self.assertEqual(result.piers[0].reactions[0]['FZ'], -3)
         self.assertEqual(result.piers[0].water_table_depth_ft, 0)
-        self.assertIsNone(result.soil_profiles[0].layers[0].properties['k_cyclic'])
+        self.assertIsNone(result.soil_profiles[0].layers[0].properties.k_cyclic)
         self.assertFalse(result.input_valid)  # units still unconfirmed
         self.assertFalse(result.to_dict()['solver_ready'])
 
@@ -49,7 +60,7 @@ class PreparationTests(unittest.TestCase):
         result = self.run_fixture(boring='SB3', end=0, assignment='SB23')
         messages = [i.message for i in result.issues]
         self.assertTrue(any('no unique soil table' in m for m in messages))
-        self.assertTrue(any('END must exceed START' in m for m in messages))
+        self.assertTrue(any('END depth must exceed' in m for m in messages))
         self.assertTrue(any('No extracted load combinations' in m for m in messages))
 
     def test_label_mismatch_is_flagged_and_does_not_reassign_profile(self):
@@ -75,6 +86,60 @@ class PreparationTests(unittest.TestCase):
         self.assertIn('tblSOIL_BORING_03', report)
         self.assertIn('INPUT TABLES!C2', report)
         self.assertIn('No extracted load combinations', report)
+
+    def test_factored_static_header_mapping(self):
+        for descriptive in (False, True):
+            result = self.run_fixture(descriptive_header=descriptive)
+            layer = result.soil_profiles[0].layers[0]
+            self.assertEqual(layer.properties.k_static_factored, 133)
+            self.assertEqual(layer.cells['k_static_factored'], 'GEOTECH PARAMETERS!J3')
+            self.assertFalse(hasattr(layer.properties, 'k_cyclic_factored'))
+            self.assertFalse(any('Missing columns:' in i.message or 'Ambiguous legacy' in i.message for i in result.issues))
+
+    def test_confirmed_units_and_depths(self):
+        import config
+        result = self.run_fixture(soil_units=config.SOIL_UNITS)
+        layer = result.soil_profiles[0].layers[0]
+        self.assertEqual(layer.properties.end, 10)
+        self.assertEqual(layer.properties.e50, 0.01)
+        self.assertEqual(layer.properties.e50_factored, 0.015)
+        self.assertEqual(layer.raw_properties['e50'], 1)
+        self.assertEqual(layer.raw_properties['e50_factored'], 1.5)
+        self.assertEqual(layer.properties.k_static_factored, 133)
+        self.assertFalse(any('Confirm soil unit' in i.message or 'END depth' in i.message for i in result.issues))
+        rows = soil_report_rows(result)
+        self.assertEqual(next(r[7] for r in rows if r[4] == 'density'), 'lb/ft^3')
+
+    def test_depth_origin_and_layer_continuity(self):
+        valid = self.run_fixture(next_start=10)
+        self.assertFalse(any('START depth' in i.message or 'gap/overlap' in i.message for i in valid.issues))
+        for start in (9, 11):
+            result = self.run_fixture(next_start=start)
+            self.assertTrue(any('gap/overlap' in i.message and i.source.endswith('!A4') for i in result.issues))
+        result = self.run_fixture(start=1)
+        self.assertTrue(any('must be zero' in i.message for i in result.issues))
+        result = self.run_fixture(start=-1)
+        self.assertTrue(any('nonnegative' in i.message and i.source.endswith('!A3') for i in result.issues))
+
+    def test_percentage_cells_are_not_converted_twice(self):
+        layer = self.run_fixture(percentage_cells=True).soil_profiles[0].layers[0]
+        self.assertEqual(layer.properties.e50, 0.01)
+        self.assertEqual(layer.properties.e50_factored, 0.015)
+
+    def test_typed_parameters_preserve_json_and_source_tracking(self):
+        import json
+        from soil_parameters import SoilParameters
+        result = self.run_fixture()
+        layer = result.soil_profiles[0].layers[0]
+        self.assertIsInstance(layer.properties, SoilParameters)
+        self.assertEqual(layer.properties.model, 'SOFT CLAY')
+        self.assertEqual(layer.raw_properties['k_cyclic'], '-')
+        exported = json.loads(json.dumps(result.to_dict()))['soil_profiles'][0]['layers'][0]
+        self.assertEqual(len(exported['properties']), 12)
+        self.assertIsNone(exported['properties']['k_cyclic'])
+        self.assertEqual(exported['properties']['k_static_factored'], 133)
+        self.assertEqual(exported['cells']['k_static_factored'], 'GEOTECH PARAMETERS!J3')
+        self.assertEqual(len(soil_report_rows(result)), 12)
 
     def test_diameter_table_lookup_preserves_both_limits(self):
         result = self.run_fixture()

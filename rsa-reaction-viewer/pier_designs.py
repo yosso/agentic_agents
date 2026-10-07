@@ -8,6 +8,7 @@ import re
 import openpyxl
 from openpyxl.utils.cell import range_boundaries
 import config
+from soil_parameters import SoilParameters
 
 
 @dataclass
@@ -21,7 +22,7 @@ class Issue:
 @dataclass
 class SoilLayer:
     source_row: int
-    properties: dict
+    properties: SoilParameters
     cells: dict
     raw_properties: dict = field(default_factory=dict)
 
@@ -80,7 +81,8 @@ SOIL_FIELDS = {
     'START': 'start', 'END': 'end', 'MODEL': 'model', 'DENSITY': 'density',
     'COHESION ULT.(KSF)': 'cohesion_ultimate', 'COHESION FACT.': 'cohesion_factored',
     'FRICTION ANGLE': 'friction_angle', 'MODULUS OF SUBGRADE REACTION (STATIC)': 'k_static',
-    'MODULUS OF SUBGRADE REACTION (CYCLIC)': 'k_cyclic', 'FKH': 'k_factored',
+    'MODULUS OF SUBGRADE REACTION (CYCLIC)': 'k_cyclic',
+    'FKH': 'k_static_factored',
     'E50': 'e50', 'FE50': 'e50_factored',
 }
 ASSIGNMENT_FIELDS = {
@@ -185,21 +187,36 @@ def prepare_pier_designs(workbook_path, reactions=(), *, boring_ids=None, soil_u
                         issue(id_cell, f'Boring ID mismatch: table {table.name} identifies {boring}, but worksheet label is {label!r}.')
                 profile = SoilProfile(boring, table.name, f'{soil_sheet}/{table.name}', units=units.copy())
                 previous_end = None
-                for row, data, cells in table_rows(soil_sheet, table.name, SOIL_FIELDS):
+                # Header mapping preserves the confirmed 12-column workbook schema.
+                read_fields = dict(SOIL_FIELDS)
+                read_fields['FACTORED MODULUS OF SUBGRADE REACTION (STATIC)'] = 'k_static_factored'
+                for row, data, cells in table_rows(soil_sheet, table.name, read_fields):
+                    for name in SOIL_FIELDS.values():
+                        if name not in data:
+                            data[name] = None
+                            cells[name] = f'{soil_sheet}/{table.name}'
                     properties = {}
                     for name, value in data.items():
                         properties[name] = (str(value).strip() if value is not None else '') if name == 'model' else number(value, cells[name], optional=name == 'k_cyclic')
-                    if not properties.get('model'):
+                        if name in ('e50', 'e50_factored') and properties[name] is not None:
+                            # Plain E50/FE50 values are percentage points; Excel
+                            # percentage cells already store the fractional value.
+                            coordinate = cells[name].split('!', 1)[1]
+                            if '%' not in sheet[coordinate].number_format:
+                                properties[name] /= 100
+                    properties = SoilParameters(**properties)
+                    if not properties.model:
                         issue(cells.get('model', table.name), 'Soil model name is missing.')
-                    start, end = properties.get('start'), properties.get('end')
+                    start, end = properties.start, properties.end
                     if start is not None and end is not None:
                         if end <= start:
-                            issue(cells['end'], 'Layer END must exceed START.')
-                        expected_start = previous_end if previous_end is not None else 0
-                        if not math.isclose(start, expected_start, abs_tol=1e-8):
-                            issue(cells['start'], f'Layer gap/overlap or missing surface layer: expected START {expected_start}, got {start}.')
+                            issue(cells['end'], 'Layer END depth must exceed START depth.')
+                        if not profile.layers and not math.isclose(start, 0, rel_tol=0, abs_tol=1e-8):
+                            issue(cells['start'], 'First layer START depth must be zero at the top of the hole.')
+                        if previous_end is not None and not math.isclose(start, previous_end, rel_tol=0, abs_tol=1e-8):
+                            issue(cells['start'], f'Layer gap/overlap: expected START {previous_end}, got {start}.')
                         previous_end = end
-                    if properties.get('friction_angle') is not None and properties['friction_angle'] >= 90:
+                    if properties.friction_angle is not None and properties.friction_angle >= 90:
                         issue(cells['friction_angle'], 'Friction angle must be less than 90 degrees.')
                     profile.layers.append(SoilLayer(row, properties, cells, dict(data)))
                 if not profile.layers:
@@ -217,7 +234,7 @@ def prepare_pier_designs(workbook_path, reactions=(), *, boring_ids=None, soil_u
         for key in required_units:
             if not units.get(key):
                 issue(soil_sheet, f'Confirm soil unit/convention for {key} in SOIL_UNITS; no conversion has been assumed.')
-        issue(soil_sheet, 'Cohesion header states KSF; confirm that values and selected unit agree. Confirm ultimate/factored parameter selection before building soil springs.', severity='WARNING')
+        issue(soil_sheet, 'Confirm ultimate/factored parameter selection before building soil springs.', severity='WARNING')
 
         assignment_sheet, assignment_table = config.ASSIGNMENT_SHEET_NAME, config.ASSIGNMENT_TABLE_NAME
         criteria_fields = {'DIA (FT)': 'diameter', 'TIP DEF (IN)': 'tip_deflection',

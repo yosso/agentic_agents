@@ -51,183 +51,179 @@ Source values are retained in workbook units. This report does not establish sol
 
 ## Extracted soil parameters
 
+START/END are depths in feet, positive downward from zero at the top of the hole. Layers follow worksheet order with shared boundaries.
+
 | Footings | Boring | Table | Layer | Parameter | Source value | Parsed value | Units | Source cell | Finding |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| A | SB1 | tblSOIL_BORING_01 | 1 | start | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!C8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 1 | end | 2.5 | 2.5 | UNCONFIRMED | GEOTECH PARAMETERS!D8 | Unit/convention must be confirmed. |
+| A | SB1 | tblSOIL_BORING_01 | 1 | start | 0 | 0.0 | ft | GEOTECH PARAMETERS!C8 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 1 | end | 2.5 | 2.5 | ft | GEOTECH PARAMETERS!D8 | Read |
 | A | SB1 | tblSOIL_BORING_01 | 1 | model | SOFT CLAY | SOFT CLAY | — | GEOTECH PARAMETERS!E8 | Read |
-| A | SB1 | tblSOIL_BORING_01 | 1 | density | 125 | 125.0 | UNCONFIRMED | GEOTECH PARAMETERS!F8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 1 | cohesion_ultimate | 0.01 | 0.01 | UNCONFIRMED | GEOTECH PARAMETERS!G8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 1 | cohesion_factored | 0.00666 | 0.00666 | UNCONFIRMED | GEOTECH PARAMETERS!H8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 1 | friction_angle | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!I8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 1 | k_static | 0.01 | 0.01 | UNCONFIRMED | GEOTECH PARAMETERS!J8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 1 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 1 | k_factored | 0.00666 | 0.00666 | UNCONFIRMED | GEOTECH PARAMETERS!L8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 1 | e50 | 5.38 | 5.38 | UNCONFIRMED | GEOTECH PARAMETERS!M8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 1 | e50_factored | 8.07 | 8.07 | UNCONFIRMED | GEOTECH PARAMETERS!N8 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | start | 2.5 | 2.5 | UNCONFIRMED | GEOTECH PARAMETERS!C9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | end | 15 | 15.0 | UNCONFIRMED | GEOTECH PARAMETERS!D9 | Unit/convention must be confirmed. |
+| A | SB1 | tblSOIL_BORING_01 | 1 | density | 125 | 125.0 | lb/ft^3 | GEOTECH PARAMETERS!F8 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 1 | cohesion_ultimate | 0.01 | 0.01 | kip/ft^2 | GEOTECH PARAMETERS!G8 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 1 | cohesion_factored | 0.00666 | 0.00666 | kip/ft^2 | GEOTECH PARAMETERS!H8 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 1 | friction_angle | 0 | 0.0 | degrees | GEOTECH PARAMETERS!I8 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 1 | k_static | 0.01 | 0.01 | lb/in^3 | GEOTECH PARAMETERS!J8 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 1 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K8 | Not supplied |
+| A | SB1 | tblSOIL_BORING_01 | 1 | k_static_factored | 0.00666 | 0.00666 | lb/in^3 | GEOTECH PARAMETERS!L8 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 1 | e50 | 5.38 | 5.38 | unitless | GEOTECH PARAMETERS!M8 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 1 | e50_factored | 8.07 | 8.07 | unitless | GEOTECH PARAMETERS!N8 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 2 | start | 2.5 | 2.5 | ft | GEOTECH PARAMETERS!C9 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 2 | end | 15 | 15.0 | ft | GEOTECH PARAMETERS!D9 | Read |
 | A | SB1 | tblSOIL_BORING_01 | 2 | model | SOFT CLAY | SOFT CLAY | — | GEOTECH PARAMETERS!E9 | Read |
-| A | SB1 | tblSOIL_BORING_01 | 2 | density | 125 | 125.0 | UNCONFIRMED | GEOTECH PARAMETERS!F9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | cohesion_ultimate | 1000 | 1000.0 | UNCONFIRMED | GEOTECH PARAMETERS!G9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | cohesion_factored | 666 | 666.0 | UNCONFIRMED | GEOTECH PARAMETERS!H9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | friction_angle | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!I9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | k_static | 220 | 220.0 | UNCONFIRMED | GEOTECH PARAMETERS!J9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | k_factored | 146.52 | 146.52 | UNCONFIRMED | GEOTECH PARAMETERS!L9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | e50 | 1.33 | 1.33 | UNCONFIRMED | GEOTECH PARAMETERS!M9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 2 | e50_factored | 1.995 | 1.995 | UNCONFIRMED | GEOTECH PARAMETERS!N9 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | start | 15 | 15.0 | UNCONFIRMED | GEOTECH PARAMETERS!C10 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | end | 25 | 25.0 | UNCONFIRMED | GEOTECH PARAMETERS!D10 | Unit/convention must be confirmed. |
+| A | SB1 | tblSOIL_BORING_01 | 2 | density | 125 | 125.0 | lb/ft^3 | GEOTECH PARAMETERS!F9 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 2 | cohesion_ultimate | 1000 | 1000.0 | kip/ft^2 | GEOTECH PARAMETERS!G9 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 2 | cohesion_factored | 666 | 666.0 | kip/ft^2 | GEOTECH PARAMETERS!H9 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 2 | friction_angle | 0 | 0.0 | degrees | GEOTECH PARAMETERS!I9 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 2 | k_static | 220 | 220.0 | lb/in^3 | GEOTECH PARAMETERS!J9 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 2 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K9 | Not supplied |
+| A | SB1 | tblSOIL_BORING_01 | 2 | k_static_factored | 146.52 | 146.52 | lb/in^3 | GEOTECH PARAMETERS!L9 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 2 | e50 | 1.33 | 1.33 | unitless | GEOTECH PARAMETERS!M9 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 2 | e50_factored | 1.995 | 1.995 | unitless | GEOTECH PARAMETERS!N9 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 3 | start | 15 | 15.0 | ft | GEOTECH PARAMETERS!C10 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 3 | end | 25 | 25.0 | ft | GEOTECH PARAMETERS!D10 | Read |
 | A | SB1 | tblSOIL_BORING_01 | 3 | model | STIFF CLAY | STIFF CLAY | — | GEOTECH PARAMETERS!E10 | Read |
-| A | SB1 | tblSOIL_BORING_01 | 3 | density | 150 | 150.0 | UNCONFIRMED | GEOTECH PARAMETERS!F10 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | cohesion_ultimate | 1300 | 1300.0 | UNCONFIRMED | GEOTECH PARAMETERS!G10 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | cohesion_factored | 865.8000000000001 | 865.8000000000001 | UNCONFIRMED | GEOTECH PARAMETERS!H10 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | friction_angle | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!I10 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | k_static | 330 | 330.0 | UNCONFIRMED | GEOTECH PARAMETERS!J10 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K10 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | k_factored | 219.78 | 219.78 | UNCONFIRMED | GEOTECH PARAMETERS!L10 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | e50 | 0.86 | 0.86 | UNCONFIRMED | GEOTECH PARAMETERS!M10 | Unit/convention must be confirmed. |
-| A | SB1 | tblSOIL_BORING_01 | 3 | e50_factored | 1.29 | 1.29 | UNCONFIRMED | GEOTECH PARAMETERS!N10 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | start | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!C18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | end | 2.5 | 2.5 | UNCONFIRMED | GEOTECH PARAMETERS!D18 | Unit/convention must be confirmed. |
+| A | SB1 | tblSOIL_BORING_01 | 3 | density | 150 | 150.0 | lb/ft^3 | GEOTECH PARAMETERS!F10 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 3 | cohesion_ultimate | 1300 | 1300.0 | kip/ft^2 | GEOTECH PARAMETERS!G10 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 3 | cohesion_factored | 865.8000000000001 | 865.8000000000001 | kip/ft^2 | GEOTECH PARAMETERS!H10 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 3 | friction_angle | 0 | 0.0 | degrees | GEOTECH PARAMETERS!I10 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 3 | k_static | 330 | 330.0 | lb/in^3 | GEOTECH PARAMETERS!J10 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 3 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K10 | Not supplied |
+| A | SB1 | tblSOIL_BORING_01 | 3 | k_static_factored | 219.78 | 219.78 | lb/in^3 | GEOTECH PARAMETERS!L10 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 3 | e50 | 0.86 | 0.86 | unitless | GEOTECH PARAMETERS!M10 | Read |
+| A | SB1 | tblSOIL_BORING_01 | 3 | e50_factored | 1.29 | 1.29 | unitless | GEOTECH PARAMETERS!N10 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 1 | start | 0 | 0.0 | ft | GEOTECH PARAMETERS!C18 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 1 | end | 2.5 | 2.5 | ft | GEOTECH PARAMETERS!D18 | Read |
 | B | SB2 | tblSOIL_BORING_02 | 1 | model | STIFF CLAY | STIFF CLAY | — | GEOTECH PARAMETERS!E18 | Read |
-| B | SB2 | tblSOIL_BORING_02 | 1 | density | 125 | 125.0 | UNCONFIRMED | GEOTECH PARAMETERS!F18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | cohesion_ultimate | 0.01 | 0.01 | UNCONFIRMED | GEOTECH PARAMETERS!G18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | cohesion_factored | 0.00666 | 0.00666 | UNCONFIRMED | GEOTECH PARAMETERS!H18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | friction_angle | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!I18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | k_static | 0.01 | 0.01 | UNCONFIRMED | GEOTECH PARAMETERS!J18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | k_factored | 0.00666 | 0.00666 | UNCONFIRMED | GEOTECH PARAMETERS!L18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | e50 | 1 | 1.0 | UNCONFIRMED | GEOTECH PARAMETERS!M18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 1 | e50_factored | 1.5 | 1.5 | UNCONFIRMED | GEOTECH PARAMETERS!N18 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | start | 2.5 | 2.5 | UNCONFIRMED | GEOTECH PARAMETERS!C19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | end | 3.5 | 3.5 | UNCONFIRMED | GEOTECH PARAMETERS!D19 | Unit/convention must be confirmed. |
+| B | SB2 | tblSOIL_BORING_02 | 1 | density | 125 | 125.0 | lb/ft^3 | GEOTECH PARAMETERS!F18 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 1 | cohesion_ultimate | 0.01 | 0.01 | kip/ft^2 | GEOTECH PARAMETERS!G18 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 1 | cohesion_factored | 0.00666 | 0.00666 | kip/ft^2 | GEOTECH PARAMETERS!H18 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 1 | friction_angle | 0 | 0.0 | degrees | GEOTECH PARAMETERS!I18 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 1 | k_static | 0.01 | 0.01 | lb/in^3 | GEOTECH PARAMETERS!J18 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 1 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K18 | Not supplied |
+| B | SB2 | tblSOIL_BORING_02 | 1 | k_static_factored | 0.00666 | 0.00666 | lb/in^3 | GEOTECH PARAMETERS!L18 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 1 | e50 | 1 | 1.0 | unitless | GEOTECH PARAMETERS!M18 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 1 | e50_factored | 1.5 | 1.5 | unitless | GEOTECH PARAMETERS!N18 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 2 | start | 2.5 | 2.5 | ft | GEOTECH PARAMETERS!C19 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 2 | end | 3.5 | 3.5 | ft | GEOTECH PARAMETERS!D19 | Read |
 | B | SB2 | tblSOIL_BORING_02 | 2 | model | STIFF CLAY | STIFF CLAY | — | GEOTECH PARAMETERS!E19 | Read |
-| B | SB2 | tblSOIL_BORING_02 | 2 | density | 125 | 125.0 | UNCONFIRMED | GEOTECH PARAMETERS!F19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | cohesion_ultimate | 1000 | 1000.0 | UNCONFIRMED | GEOTECH PARAMETERS!G19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | cohesion_factored | 666 | 666.0 | UNCONFIRMED | GEOTECH PARAMETERS!H19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | friction_angle | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!I19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | k_static | 220 | 220.0 | UNCONFIRMED | GEOTECH PARAMETERS!J19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | k_factored | 146.52 | 146.52 | UNCONFIRMED | GEOTECH PARAMETERS!L19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | e50 | 0.99 | 0.99 | UNCONFIRMED | GEOTECH PARAMETERS!M19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 2 | e50_factored | 1.4849999999999999 | 1.4849999999999999 | UNCONFIRMED | GEOTECH PARAMETERS!N19 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | start | 3.5 | 3.5 | UNCONFIRMED | GEOTECH PARAMETERS!C20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | end | 9.3 | 9.3 | UNCONFIRMED | GEOTECH PARAMETERS!D20 | Unit/convention must be confirmed. |
+| B | SB2 | tblSOIL_BORING_02 | 2 | density | 125 | 125.0 | lb/ft^3 | GEOTECH PARAMETERS!F19 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 2 | cohesion_ultimate | 1000 | 1000.0 | kip/ft^2 | GEOTECH PARAMETERS!G19 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 2 | cohesion_factored | 666 | 666.0 | kip/ft^2 | GEOTECH PARAMETERS!H19 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 2 | friction_angle | 0 | 0.0 | degrees | GEOTECH PARAMETERS!I19 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 2 | k_static | 220 | 220.0 | lb/in^3 | GEOTECH PARAMETERS!J19 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 2 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K19 | Not supplied |
+| B | SB2 | tblSOIL_BORING_02 | 2 | k_static_factored | 146.52 | 146.52 | lb/in^3 | GEOTECH PARAMETERS!L19 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 2 | e50 | 0.99 | 0.99 | unitless | GEOTECH PARAMETERS!M19 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 2 | e50_factored | 1.4849999999999999 | 1.4849999999999999 | unitless | GEOTECH PARAMETERS!N19 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 3 | start | 3.5 | 3.5 | ft | GEOTECH PARAMETERS!C20 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 3 | end | 9.3 | 9.3 | ft | GEOTECH PARAMETERS!D20 | Read |
 | B | SB2 | tblSOIL_BORING_02 | 3 | model | STIFF CLAY | STIFF CLAY | — | GEOTECH PARAMETERS!E20 | Read |
-| B | SB2 | tblSOIL_BORING_02 | 3 | density | 125 | 125.0 | UNCONFIRMED | GEOTECH PARAMETERS!F20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | cohesion_ultimate | 1500 | 1500.0 | UNCONFIRMED | GEOTECH PARAMETERS!G20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | cohesion_factored | 999 | 999.0 | UNCONFIRMED | GEOTECH PARAMETERS!H20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | friction_angle | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!I20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | k_static | 430 | 430.0 | UNCONFIRMED | GEOTECH PARAMETERS!J20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | k_factored | 286.38 | 286.38 | UNCONFIRMED | GEOTECH PARAMETERS!L20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | e50 | 0.75 | 0.75 | UNCONFIRMED | GEOTECH PARAMETERS!M20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 3 | e50_factored | 1.125 | 1.125 | UNCONFIRMED | GEOTECH PARAMETERS!N20 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | start | 9.3 | 9.3 | UNCONFIRMED | GEOTECH PARAMETERS!C21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | end | 19.1 | 19.1 | UNCONFIRMED | GEOTECH PARAMETERS!D21 | Unit/convention must be confirmed. |
+| B | SB2 | tblSOIL_BORING_02 | 3 | density | 125 | 125.0 | lb/ft^3 | GEOTECH PARAMETERS!F20 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 3 | cohesion_ultimate | 1500 | 1500.0 | kip/ft^2 | GEOTECH PARAMETERS!G20 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 3 | cohesion_factored | 999 | 999.0 | kip/ft^2 | GEOTECH PARAMETERS!H20 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 3 | friction_angle | 0 | 0.0 | degrees | GEOTECH PARAMETERS!I20 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 3 | k_static | 430 | 430.0 | lb/in^3 | GEOTECH PARAMETERS!J20 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 3 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K20 | Not supplied |
+| B | SB2 | tblSOIL_BORING_02 | 3 | k_static_factored | 286.38 | 286.38 | lb/in^3 | GEOTECH PARAMETERS!L20 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 3 | e50 | 0.75 | 0.75 | unitless | GEOTECH PARAMETERS!M20 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 3 | e50_factored | 1.125 | 1.125 | unitless | GEOTECH PARAMETERS!N20 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 4 | start | 9.3 | 9.3 | ft | GEOTECH PARAMETERS!C21 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 4 | end | 19.1 | 19.1 | ft | GEOTECH PARAMETERS!D21 | Read |
 | B | SB2 | tblSOIL_BORING_02 | 4 | model | STIFF CLAY | STIFF CLAY | — | GEOTECH PARAMETERS!E21 | Read |
-| B | SB2 | tblSOIL_BORING_02 | 4 | density | 125 | 125.0 | UNCONFIRMED | GEOTECH PARAMETERS!F21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | cohesion_ultimate | 2000 | 2000.0 | UNCONFIRMED | GEOTECH PARAMETERS!G21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | cohesion_factored | 1332 | 1332.0 | UNCONFIRMED | GEOTECH PARAMETERS!H21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | friction_angle | 8 | 8.0 | UNCONFIRMED | GEOTECH PARAMETERS!I21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | k_static | 600 | 600.0 | UNCONFIRMED | GEOTECH PARAMETERS!J21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | k_factored | 399.6 | 399.6 | UNCONFIRMED | GEOTECH PARAMETERS!L21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | e50 | 0.66 | 0.66 | UNCONFIRMED | GEOTECH PARAMETERS!M21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 4 | e50_factored | 0.99 | 0.99 | UNCONFIRMED | GEOTECH PARAMETERS!N21 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | start | 19.1 | 19.1 | UNCONFIRMED | GEOTECH PARAMETERS!C22 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | end | 30 | 30.0 | UNCONFIRMED | GEOTECH PARAMETERS!D22 | Unit/convention must be confirmed. |
+| B | SB2 | tblSOIL_BORING_02 | 4 | density | 125 | 125.0 | lb/ft^3 | GEOTECH PARAMETERS!F21 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 4 | cohesion_ultimate | 2000 | 2000.0 | kip/ft^2 | GEOTECH PARAMETERS!G21 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 4 | cohesion_factored | 1332 | 1332.0 | kip/ft^2 | GEOTECH PARAMETERS!H21 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 4 | friction_angle | 8 | 8.0 | degrees | GEOTECH PARAMETERS!I21 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 4 | k_static | 600 | 600.0 | lb/in^3 | GEOTECH PARAMETERS!J21 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 4 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K21 | Not supplied |
+| B | SB2 | tblSOIL_BORING_02 | 4 | k_static_factored | 399.6 | 399.6 | lb/in^3 | GEOTECH PARAMETERS!L21 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 4 | e50 | 0.66 | 0.66 | unitless | GEOTECH PARAMETERS!M21 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 4 | e50_factored | 0.99 | 0.99 | unitless | GEOTECH PARAMETERS!N21 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 5 | start | 19.1 | 19.1 | ft | GEOTECH PARAMETERS!C22 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 5 | end | 30 | 30.0 | ft | GEOTECH PARAMETERS!D22 | Read |
 | B | SB2 | tblSOIL_BORING_02 | 5 | model | PORUS LIMESTONE | PORUS LIMESTONE | — | GEOTECH PARAMETERS!E22 | Read |
-| B | SB2 | tblSOIL_BORING_02 | 5 | density | 155 | 155.0 | UNCONFIRMED | GEOTECH PARAMETERS!F22 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | cohesion_ultimate | 200000 | 200000.0 | UNCONFIRMED | GEOTECH PARAMETERS!G22 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | cohesion_factored | 133200 | 133200.0 | UNCONFIRMED | GEOTECH PARAMETERS!H22 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | friction_angle | 15 | 15.0 | UNCONFIRMED | GEOTECH PARAMETERS!I22 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | k_static | 1000 | 1000.0 | UNCONFIRMED | GEOTECH PARAMETERS!J22 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | k_cyclic | Missing | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K22 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | k_factored | 666 | 666.0 | UNCONFIRMED | GEOTECH PARAMETERS!L22 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | e50 | 0.05 | 0.05 | UNCONFIRMED | GEOTECH PARAMETERS!M22 | Unit/convention must be confirmed. |
-| B | SB2 | tblSOIL_BORING_02 | 5 | e50_factored | 0.07500000000000001 | 0.07500000000000001 | UNCONFIRMED | GEOTECH PARAMETERS!N22 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | start | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!C28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | end | 2.5 | 2.5 | UNCONFIRMED | GEOTECH PARAMETERS!D28 | Unit/convention must be confirmed. |
+| B | SB2 | tblSOIL_BORING_02 | 5 | density | 155 | 155.0 | lb/ft^3 | GEOTECH PARAMETERS!F22 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 5 | cohesion_ultimate | 200000 | 200000.0 | kip/ft^2 | GEOTECH PARAMETERS!G22 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 5 | cohesion_factored | 133200 | 133200.0 | kip/ft^2 | GEOTECH PARAMETERS!H22 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 5 | friction_angle | 15 | 15.0 | degrees | GEOTECH PARAMETERS!I22 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 5 | k_static | 1000 | 1000.0 | lb/in^3 | GEOTECH PARAMETERS!J22 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 5 | k_cyclic | Missing | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K22 | Not supplied |
+| B | SB2 | tblSOIL_BORING_02 | 5 | k_static_factored | 666 | 666.0 | lb/in^3 | GEOTECH PARAMETERS!L22 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 5 | e50 | 0.05 | 0.05 | unitless | GEOTECH PARAMETERS!M22 | Read |
+| B | SB2 | tblSOIL_BORING_02 | 5 | e50_factored | 0.07500000000000001 | 0.07500000000000001 | unitless | GEOTECH PARAMETERS!N22 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 1 | start | 0 | 0.0 | ft | GEOTECH PARAMETERS!C28 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 1 | end | 2.5 | 2.5 | ft | GEOTECH PARAMETERS!D28 | Read |
 | C | SB3 | tblSOIL_BORING_03 | 1 | model | STIFF CLAY | STIFF CLAY | — | GEOTECH PARAMETERS!E28 | Read |
-| C | SB3 | tblSOIL_BORING_03 | 1 | density | 125 | 125.0 | UNCONFIRMED | GEOTECH PARAMETERS!F28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | cohesion_ultimate | 0.01 | 0.01 | UNCONFIRMED | GEOTECH PARAMETERS!G28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | cohesion_factored | 0.00666 | 0.00666 | UNCONFIRMED | GEOTECH PARAMETERS!H28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | friction_angle | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!I28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | k_static | 0.01 | 0.01 | UNCONFIRMED | GEOTECH PARAMETERS!J28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | k_factored | 0.00666 | 0.00666 | UNCONFIRMED | GEOTECH PARAMETERS!L28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | e50 | 1 | 1.0 | UNCONFIRMED | GEOTECH PARAMETERS!M28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 1 | e50_factored | 1.5 | 1.5 | UNCONFIRMED | GEOTECH PARAMETERS!N28 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | start | 2.5 | 2.5 | UNCONFIRMED | GEOTECH PARAMETERS!C29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | end | 5.5 | 5.5 | UNCONFIRMED | GEOTECH PARAMETERS!D29 | Unit/convention must be confirmed. |
+| C | SB3 | tblSOIL_BORING_03 | 1 | density | 125 | 125.0 | lb/ft^3 | GEOTECH PARAMETERS!F28 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 1 | cohesion_ultimate | 0.01 | 0.01 | kip/ft^2 | GEOTECH PARAMETERS!G28 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 1 | cohesion_factored | 0.00666 | 0.00666 | kip/ft^2 | GEOTECH PARAMETERS!H28 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 1 | friction_angle | 0 | 0.0 | degrees | GEOTECH PARAMETERS!I28 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 1 | k_static | 0.01 | 0.01 | lb/in^3 | GEOTECH PARAMETERS!J28 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 1 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K28 | Not supplied |
+| C | SB3 | tblSOIL_BORING_03 | 1 | k_static_factored | 0.00666 | 0.00666 | lb/in^3 | GEOTECH PARAMETERS!L28 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 1 | e50 | 1 | 1.0 | unitless | GEOTECH PARAMETERS!M28 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 1 | e50_factored | 1.5 | 1.5 | unitless | GEOTECH PARAMETERS!N28 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 2 | start | 2.5 | 2.5 | ft | GEOTECH PARAMETERS!C29 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 2 | end | 5.5 | 5.5 | ft | GEOTECH PARAMETERS!D29 | Read |
 | C | SB3 | tblSOIL_BORING_03 | 2 | model | SAND/GRAVEL | SAND/GRAVEL | — | GEOTECH PARAMETERS!E29 | Read |
-| C | SB3 | tblSOIL_BORING_03 | 2 | density | 125 | 125.0 | UNCONFIRMED | GEOTECH PARAMETERS!F29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | cohesion_ultimate | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!G29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | cohesion_factored | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!H29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | friction_angle | 35 | 35.0 | UNCONFIRMED | GEOTECH PARAMETERS!I29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | k_static | 75.6 | 75.6 | UNCONFIRMED | GEOTECH PARAMETERS!J29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | k_factored | 50.3496 | 50.3496 | UNCONFIRMED | GEOTECH PARAMETERS!L29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | e50 | 1 | 1.0 | UNCONFIRMED | GEOTECH PARAMETERS!M29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 2 | e50_factored | 1.5 | 1.5 | UNCONFIRMED | GEOTECH PARAMETERS!N29 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | start | 5.5 | 5.5 | UNCONFIRMED | GEOTECH PARAMETERS!C30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | end | 8.8 | 8.8 | UNCONFIRMED | GEOTECH PARAMETERS!D30 | Unit/convention must be confirmed. |
+| C | SB3 | tblSOIL_BORING_03 | 2 | density | 125 | 125.0 | lb/ft^3 | GEOTECH PARAMETERS!F29 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 2 | cohesion_ultimate | 0 | 0.0 | kip/ft^2 | GEOTECH PARAMETERS!G29 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 2 | cohesion_factored | 0 | 0.0 | kip/ft^2 | GEOTECH PARAMETERS!H29 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 2 | friction_angle | 35 | 35.0 | degrees | GEOTECH PARAMETERS!I29 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 2 | k_static | 75.6 | 75.6 | lb/in^3 | GEOTECH PARAMETERS!J29 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 2 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K29 | Not supplied |
+| C | SB3 | tblSOIL_BORING_03 | 2 | k_static_factored | 50.3496 | 50.3496 | lb/in^3 | GEOTECH PARAMETERS!L29 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 2 | e50 | 1 | 1.0 | unitless | GEOTECH PARAMETERS!M29 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 2 | e50_factored | 1.5 | 1.5 | unitless | GEOTECH PARAMETERS!N29 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 3 | start | 5.5 | 5.5 | ft | GEOTECH PARAMETERS!C30 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 3 | end | 8.8 | 8.8 | ft | GEOTECH PARAMETERS!D30 | Read |
 | C | SB3 | tblSOIL_BORING_03 | 3 | model | STIFF CLAY | STIFF CLAY | — | GEOTECH PARAMETERS!E30 | Read |
-| C | SB3 | tblSOIL_BORING_03 | 3 | density | 125 | 125.0 | UNCONFIRMED | GEOTECH PARAMETERS!F30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | cohesion_ultimate | 2500 | 2500.0 | UNCONFIRMED | GEOTECH PARAMETERS!G30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | cohesion_factored | 1665 | 1665.0 | UNCONFIRMED | GEOTECH PARAMETERS!H30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | friction_angle | 0 | 0.0 | UNCONFIRMED | GEOTECH PARAMETERS!I30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | k_static | 150 | 150.0 | UNCONFIRMED | GEOTECH PARAMETERS!J30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | k_factored | 99.9 | 99.9 | UNCONFIRMED | GEOTECH PARAMETERS!L30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | e50 | 0.57 | 0.57 | UNCONFIRMED | GEOTECH PARAMETERS!M30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 3 | e50_factored | 0.855 | 0.855 | UNCONFIRMED | GEOTECH PARAMETERS!N30 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | start | 8.8 | 8.8 | UNCONFIRMED | GEOTECH PARAMETERS!C31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | end | 10.5 | 10.5 | UNCONFIRMED | GEOTECH PARAMETERS!D31 | Unit/convention must be confirmed. |
+| C | SB3 | tblSOIL_BORING_03 | 3 | density | 125 | 125.0 | lb/ft^3 | GEOTECH PARAMETERS!F30 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 3 | cohesion_ultimate | 2500 | 2500.0 | kip/ft^2 | GEOTECH PARAMETERS!G30 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 3 | cohesion_factored | 1665 | 1665.0 | kip/ft^2 | GEOTECH PARAMETERS!H30 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 3 | friction_angle | 0 | 0.0 | degrees | GEOTECH PARAMETERS!I30 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 3 | k_static | 150 | 150.0 | lb/in^3 | GEOTECH PARAMETERS!J30 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 3 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K30 | Not supplied |
+| C | SB3 | tblSOIL_BORING_03 | 3 | k_static_factored | 99.9 | 99.9 | lb/in^3 | GEOTECH PARAMETERS!L30 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 3 | e50 | 0.57 | 0.57 | unitless | GEOTECH PARAMETERS!M30 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 3 | e50_factored | 0.855 | 0.855 | unitless | GEOTECH PARAMETERS!N30 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 4 | start | 8.8 | 8.8 | ft | GEOTECH PARAMETERS!C31 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 4 | end | 10.5 | 10.5 | ft | GEOTECH PARAMETERS!D31 | Read |
 | C | SB3 | tblSOIL_BORING_03 | 4 | model | PORUS LIMESTONE | PORUS LIMESTONE | — | GEOTECH PARAMETERS!E31 | Read |
-| C | SB3 | tblSOIL_BORING_03 | 4 | density | 150 | 150.0 | UNCONFIRMED | GEOTECH PARAMETERS!F31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | cohesion_ultimate | 100000 | 100000.0 | UNCONFIRMED | GEOTECH PARAMETERS!G31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | cohesion_factored | 66600 | 66600.0 | UNCONFIRMED | GEOTECH PARAMETERS!H31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | friction_angle | 8 | 8.0 | UNCONFIRMED | GEOTECH PARAMETERS!I31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | k_static | 700 | 700.0 | UNCONFIRMED | GEOTECH PARAMETERS!J31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | k_cyclic | - | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | k_factored | 466.20000000000005 | 466.20000000000005 | UNCONFIRMED | GEOTECH PARAMETERS!L31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | e50 | 0.06 | 0.06 | UNCONFIRMED | GEOTECH PARAMETERS!M31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 4 | e50_factored | 0.09 | 0.09 | UNCONFIRMED | GEOTECH PARAMETERS!N31 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | start | 10.5 | 10.5 | UNCONFIRMED | GEOTECH PARAMETERS!C32 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | end | 30 | 30.0 | UNCONFIRMED | GEOTECH PARAMETERS!D32 | Unit/convention must be confirmed. |
+| C | SB3 | tblSOIL_BORING_03 | 4 | density | 150 | 150.0 | lb/ft^3 | GEOTECH PARAMETERS!F31 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 4 | cohesion_ultimate | 100000 | 100000.0 | kip/ft^2 | GEOTECH PARAMETERS!G31 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 4 | cohesion_factored | 66600 | 66600.0 | kip/ft^2 | GEOTECH PARAMETERS!H31 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 4 | friction_angle | 8 | 8.0 | degrees | GEOTECH PARAMETERS!I31 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 4 | k_static | 700 | 700.0 | lb/in^3 | GEOTECH PARAMETERS!J31 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 4 | k_cyclic | - | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K31 | Not supplied |
+| C | SB3 | tblSOIL_BORING_03 | 4 | k_static_factored | 466.20000000000005 | 466.20000000000005 | lb/in^3 | GEOTECH PARAMETERS!L31 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 4 | e50 | 0.06 | 0.06 | unitless | GEOTECH PARAMETERS!M31 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 4 | e50_factored | 0.09 | 0.09 | unitless | GEOTECH PARAMETERS!N31 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 5 | start | 10.5 | 10.5 | ft | GEOTECH PARAMETERS!C32 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 5 | end | 30 | 30.0 | ft | GEOTECH PARAMETERS!D32 | Read |
 | C | SB3 | tblSOIL_BORING_03 | 5 | model | PORUS LIMESTONE | PORUS LIMESTONE | — | GEOTECH PARAMETERS!E32 | Read |
-| C | SB3 | tblSOIL_BORING_03 | 5 | density | 160 | 160.0 | UNCONFIRMED | GEOTECH PARAMETERS!F32 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | cohesion_ultimate | 200000 | 200000.0 | UNCONFIRMED | GEOTECH PARAMETERS!G32 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | cohesion_factored | 133200 | 133200.0 | UNCONFIRMED | GEOTECH PARAMETERS!H32 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | friction_angle | 15 | 15.0 | UNCONFIRMED | GEOTECH PARAMETERS!I32 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | k_static | 1000 | 1000.0 | UNCONFIRMED | GEOTECH PARAMETERS!J32 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | k_cyclic | Missing | Unavailable | UNCONFIRMED | GEOTECH PARAMETERS!K32 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | k_factored | 666 | 666.0 | UNCONFIRMED | GEOTECH PARAMETERS!L32 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | e50 | 0.05 | 0.05 | UNCONFIRMED | GEOTECH PARAMETERS!M32 | Unit/convention must be confirmed. |
-| C | SB3 | tblSOIL_BORING_03 | 5 | e50_factored | 0.07500000000000001 | 0.07500000000000001 | UNCONFIRMED | GEOTECH PARAMETERS!N32 | Unit/convention must be confirmed. |
+| C | SB3 | tblSOIL_BORING_03 | 5 | density | 160 | 160.0 | lb/ft^3 | GEOTECH PARAMETERS!F32 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 5 | cohesion_ultimate | 200000 | 200000.0 | kip/ft^2 | GEOTECH PARAMETERS!G32 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 5 | cohesion_factored | 133200 | 133200.0 | kip/ft^2 | GEOTECH PARAMETERS!H32 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 5 | friction_angle | 15 | 15.0 | degrees | GEOTECH PARAMETERS!I32 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 5 | k_static | 1000 | 1000.0 | lb/in^3 | GEOTECH PARAMETERS!J32 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 5 | k_cyclic | Missing | Unavailable | lb/in^3 | GEOTECH PARAMETERS!K32 | Not supplied |
+| C | SB3 | tblSOIL_BORING_03 | 5 | k_static_factored | 666 | 666.0 | lb/in^3 | GEOTECH PARAMETERS!L32 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 5 | e50 | 0.05 | 0.05 | unitless | GEOTECH PARAMETERS!M32 | Read |
+| C | SB3 | tblSOIL_BORING_03 | 5 | e50_factored | 0.07500000000000001 | 0.07500000000000001 | unitless | GEOTECH PARAMETERS!N32 | Read |
 
 ## Validation findings
 
 | Severity | Footing | Source | Finding |
 | --- | --- | --- | --- |
-| ERROR | All / soil profile | GEOTECH PARAMETERS | Confirm soil unit/convention for depth in SOIL_UNITS; no conversion has been assumed. |
-| ERROR | All / soil profile | GEOTECH PARAMETERS | Confirm soil unit/convention for density in SOIL_UNITS; no conversion has been assumed. |
-| ERROR | All / soil profile | GEOTECH PARAMETERS | Confirm soil unit/convention for cohesion in SOIL_UNITS; no conversion has been assumed. |
-| ERROR | All / soil profile | GEOTECH PARAMETERS | Confirm soil unit/convention for subgrade_modulus in SOIL_UNITS; no conversion has been assumed. |
-| ERROR | All / soil profile | GEOTECH PARAMETERS | Confirm soil unit/convention for strain in SOIL_UNITS; no conversion has been assumed. |
-| ERROR | All / soil profile | GEOTECH PARAMETERS | Confirm soil unit/convention for friction_angle in SOIL_UNITS; no conversion has been assumed. |
-| WARNING | All / soil profile | GEOTECH PARAMETERS | Cohesion header states KSF; confirm that values and selected unit agree. Confirm ultimate/factored parameter selection before building soil springs. |
+| WARNING | All / soil profile | GEOTECH PARAMETERS | Confirm ultimate/factored parameter selection before building soil springs. |
 | ERROR | A | INPUT TABLES!E45 | Required numeric input is missing. |
 | WARNING | A | INPUT TABLES!F45 | Assignment 0.35640000000000005 differs from diameter-table 0.297; using DP WORKFLOW and GUIDELINES!D68. |
 | ERROR | B | INPUT TABLES!E46 | Required numeric input is missing. |
 | ERROR | C | INPUT TABLES!E47 | Required numeric input is missing. |
 | WARNING | All / soil profile | Excel saved formula results | Used 73 cached formula values. Recalculate/save Excel before preparation; this reader does not evaluate VBA/formulas. |
-| ERROR | C | Saved Robot extraction | Quantity mismatch |
-| WARNING | All / soil profile | Saved Robot extraction | Uses previously saved reactions, not a new Robot read. |
+| ERROR | C | RSA extraction | {'result_rows': 63, 'status': 'Quantity mismatch', 'group': 'THREE PHASE BUS SUPPORT (TYPE 2)', 'expected': 8, 'node_count': 7, 'mark': 'C', 'support_count': 7, 'model': 'D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd', 'nodes': [591, 593, 784, 974, 976, 1164, 1166]} |
+| WARNING | All / soil profile | RSA extraction | Uses saved reaction results; Robot was not re-read for this report. |
 
 ## All extracted combination reactions
 
