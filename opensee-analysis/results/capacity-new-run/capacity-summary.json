@@ -1,0 +1,27 @@
+{
+  "footing": "C",
+  "depth_ft": 10.0,
+  "allowable_in": 0.35640000000000005,
+  "check": "sqrt(delta_X^2 + delta_Y^2)",
+  "loading": "case",
+  "searches": [
+    {
+      "path": "case",
+      "status": "unresolved",
+      "trials": [
+        {
+          "factor": 0.0,
+          "cases": []
+        }
+      ],
+      "lower_passing_factor": null,
+      "upper_failing_factor": null,
+      "message": "INPUT ERROR: tblSOIL_BORING_03 row 31: no explicit soil model mapping for 'PORUS LIMESTONE'."
+    }
+  ],
+  "limitations": [
+    "Displacement-limited load along the chosen path, not structural shear/moment strength or complete design acceptance.",
+    "Independent 2D planes; loaded elastic displacement, not residual displacement.",
+    "Bracket search assumes a continuous monotonic displacement response along each path; no global maximum is established."
+  ]
+}

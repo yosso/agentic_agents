@@ -1,0 +1,456 @@
+{
+  "footing": "A",
+  "depth_ft": 9.0,
+  "allowable_in": 0.297,
+  "check": "sqrt(delta_X^2 + delta_Y^2)",
+  "loading": "case",
+  "searches": [
+    {
+      "path": "case",
+      "status": "bracketed",
+      "trials": [
+        {
+          "factor": 0.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.0,
+              "results_folder": "case\\trial-001\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.0,
+              "results_folder": "case\\trial-001\\Y"
+            }
+          ],
+          "deflection_in": 0.0,
+          "applied_shear_kip": 0.0,
+          "applied_moment_kip_ft": 0.0,
+          "passed": true
+        },
+        {
+          "factor": 1.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.012390640484479585,
+              "results_folder": "case\\trial-002\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.01557006669147647,
+              "results_folder": "case\\trial-002\\Y"
+            }
+          ],
+          "deflection_in": 0.019898616745709977,
+          "applied_shear_kip": 0.36408245341938367,
+          "applied_moment_kip_ft": 3.016853797095705,
+          "passed": true
+        },
+        {
+          "factor": 2.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.02478126410455328,
+              "results_folder": "case\\trial-003\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.031140124250582966,
+              "results_folder": "case\\trial-003\\Y"
+            }
+          ],
+          "deflection_in": 0.039797215844344765,
+          "applied_shear_kip": 0.7281649068387673,
+          "applied_moment_kip_ft": 6.03370759419141,
+          "passed": true
+        },
+        {
+          "factor": 4.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.04956239338856172,
+              "results_folder": "case\\trial-004\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.06228017546537328,
+              "results_folder": "case\\trial-004\\Y"
+            }
+          ],
+          "deflection_in": 0.07959429058921394,
+          "applied_shear_kip": 1.4563298136775347,
+          "applied_moment_kip_ft": 12.06741518838282,
+          "passed": true
+        },
+        {
+          "factor": 8.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.09912371120112123,
+              "results_folder": "case\\trial-005\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.12455976734190227,
+              "results_folder": "case\\trial-005\\Y"
+            }
+          ],
+          "deflection_in": 0.1591874547901062,
+          "applied_shear_kip": 2.9126596273550693,
+          "applied_moment_kip_ft": 24.13483037676564,
+          "passed": true
+        },
+        {
+          "factor": 16.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.19823883101017462,
+              "results_folder": "case\\trial-006\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.24911484341348808,
+              "results_folder": "case\\trial-006\\Y"
+            }
+          ],
+          "deflection_in": 0.3183658890792279,
+          "applied_shear_kip": 5.825319254710139,
+          "applied_moment_kip_ft": 48.26966075353128,
+          "passed": false
+        },
+        {
+          "factor": 12.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.1486828589369143,
+              "results_folder": "case\\trial-007\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.18683819575788627,
+              "results_folder": "case\\trial-007\\Y"
+            }
+          ],
+          "deflection_in": 0.2387783573436181,
+          "applied_shear_kip": 4.368989441032603,
+          "applied_moment_kip_ft": 36.20224556514845,
+          "passed": true
+        },
+        {
+          "factor": 14.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.17346130631612122,
+              "results_folder": "case\\trial-008\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.21797676425050908,
+              "results_folder": "case\\trial-008\\Y"
+            }
+          ],
+          "deflection_in": 0.27857260192276134,
+          "applied_shear_kip": 5.0971543478713714,
+          "applied_moment_kip_ft": 42.235953159339864,
+          "passed": true
+        },
+        {
+          "factor": 15.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.18585019171530368,
+              "results_folder": "case\\trial-009\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.23354587179106348,
+              "results_folder": "case\\trial-009\\Y"
+            }
+          ],
+          "deflection_in": 0.29846937529881185,
+          "applied_shear_kip": 5.461236801290755,
+          "applied_moment_kip_ft": 45.25280695643557,
+          "passed": false
+        },
+        {
+          "factor": 14.5,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.17965577882236125,
+              "results_folder": "case\\trial-010\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.22576133446086447,
+              "results_folder": "case\\trial-010\\Y"
+            }
+          ],
+          "deflection_in": 0.28852102003462327,
+          "applied_shear_kip": 5.279195574581062,
+          "applied_moment_kip_ft": 43.74438005788772,
+          "passed": true
+        },
+        {
+          "factor": 14.75,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.18275299284057034,
+              "results_folder": "case\\trial-011\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.22965360730482415,
+              "results_folder": "case\\trial-011\\Y"
+            }
+          ],
+          "deflection_in": 0.2934952056513086,
+          "applied_shear_kip": 5.370216187935909,
+          "applied_moment_kip_ft": 44.498593507161644,
+          "passed": true
+        },
+        {
+          "factor": 14.875,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": 0.1843015941858355,
+              "results_folder": "case\\trial-012\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "SINGLE PHASE BUS SUPPORT",
+                "node": 3,
+                "case": 20
+              },
+              "head_deflection_in": -0.23159974060125274,
+              "results_folder": "case\\trial-012\\Y"
+            }
+          ],
+          "deflection_in": 0.2959822924872499,
+          "applied_shear_kip": 5.415726494613332,
+          "applied_moment_kip_ft": 44.87570023179861,
+          "passed": true
+        }
+      ],
+      "lower_passing_factor": 14.875,
+      "upper_failing_factor": 15.0,
+      "upper_deflection_in": 0.29846937529881185,
+      "passing_deflection_in": 0.2959822924872499,
+      "applied_shear_kip": 5.415726494613332,
+      "applied_moment_kip_ft": 44.87570023179861,
+      "passing_results": [
+        {
+          "plane": "X",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "SINGLE PHASE BUS SUPPORT",
+            "node": 3,
+            "case": 20
+          },
+          "head_deflection_in": 0.1843015941858355,
+          "results_folder": "case\\trial-012\\X"
+        },
+        {
+          "plane": "Y",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "SINGLE PHASE BUS SUPPORT",
+            "node": 3,
+            "case": 20
+          },
+          "head_deflection_in": -0.23159974060125274,
+          "results_folder": "case\\trial-012\\Y"
+        }
+      ],
+      "internal_force_envelopes": {
+        "shear": {
+          "absolute_value": 6.104299074384181,
+          "signed_local_end_value": -6.104299074384181,
+          "unit": "kip",
+          "depth_ft": 3.4285714285714284,
+          "element": 5,
+          "end": "i",
+          "plane": "X",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "SINGLE PHASE BUS SUPPORT",
+            "node": 3,
+            "case": 20
+          },
+          "results_folder": "case\\trial-012\\X"
+        },
+        "moment": {
+          "absolute_value": 44.13207560730582,
+          "signed_local_end_value": -44.13207560730582,
+          "unit": "kip-ft",
+          "depth_ft": 0.0,
+          "element": 1,
+          "end": "i",
+          "plane": "X",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "SINGLE PHASE BUS SUPPORT",
+            "node": 3,
+            "case": 20
+          },
+          "results_folder": "case\\trial-012\\X"
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Displacement-limited load along the chosen path, not structural shear/moment strength or complete design acceptance.",
+    "Independent 2D planes; loaded elastic displacement, not residual displacement.",
+    "Bracket search assumes a continuous monotonic displacement response along each path; no global maximum is established."
+  ]
+}

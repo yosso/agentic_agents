@@ -1,0 +1,155 @@
+{
+  "check_mode": "directional",
+  "depth_increment_ft": 1,
+  "maximum_depth_ft": 35.0,
+  "case_selection": "All ties for component/resultant lateral and bending extremes, torsion, compression and uplift; coincident vectors retained.",
+  "limitations": [
+    "Load extremes do not guarantee the governing deflection over every combination.",
+    "Loaded elastic displacement is compared to the workbook allowable; residual/non-recoverable behavior is not evaluated.",
+    "Two independent 2D planes; resultant mode combines their head displacements. No torsional or axial soil capacity check.",
+    "Passing status means the configured deflection screen only, not complete design acceptance."
+  ],
+  "footings": [
+    {
+      "footing": "DEMO",
+      "status": "deflection_pass",
+      "accepted_depth_ft": 10.0,
+      "trials": [
+        {
+          "depth_ft": 10.0,
+          "cases": [
+            {
+              "reaction": {
+                "model": "synthetic.rtd",
+                "group": "DEMO",
+                "node": 1,
+                "case": 101
+              },
+              "criteria": [
+                "Maximum |FX|",
+                "Maximum |FY|",
+                "Maximum |MX|",
+                "Maximum |MY|",
+                "Maximum |MZ|",
+                "Maximum resultant shear",
+                "Maximum resultant bending",
+                "Maximum compression"
+              ],
+              "plane": "X",
+              "head_deflection_in": 0.00388536723937363,
+              "results_folder": "footing-001\\depth-001\\case-001-X",
+              "checked_deflection_in": 0.00388536723937363
+            },
+            {
+              "reaction": {
+                "model": "synthetic.rtd",
+                "group": "DEMO",
+                "node": 1,
+                "case": 101
+              },
+              "criteria": [
+                "Maximum |FX|",
+                "Maximum |FY|",
+                "Maximum |MX|",
+                "Maximum |MY|",
+                "Maximum |MZ|",
+                "Maximum resultant shear",
+                "Maximum resultant bending",
+                "Maximum compression"
+              ],
+              "plane": "Y",
+              "head_deflection_in": 0.0,
+              "results_folder": "footing-001\\depth-001\\case-001-Y",
+              "checked_deflection_in": 0.00388536723937363
+            }
+          ],
+          "checked_deflection_in": 0.00388536723937363,
+          "passed": true
+        }
+      ],
+      "selected_cases": [
+        {
+          "reaction": {
+            "model": "synthetic.rtd",
+            "group": "DEMO",
+            "node": 1,
+            "case": 101
+          },
+          "criteria": [
+            "Maximum |FX|",
+            "Maximum |FY|",
+            "Maximum |MX|",
+            "Maximum |MY|",
+            "Maximum |MZ|",
+            "Maximum resultant shear",
+            "Maximum resultant bending",
+            "Maximum compression"
+          ]
+        }
+      ],
+      "allowable_in": 0.3564,
+      "soil_coverage_ft": 40.0,
+      "checked_deflection_in": 0.00388536723937363,
+      "governing_deflection": {
+        "reaction": {
+          "model": "synthetic.rtd",
+          "group": "DEMO",
+          "node": 1,
+          "case": 101
+        },
+        "criteria": [
+          "Maximum |FX|",
+          "Maximum |FY|",
+          "Maximum |MX|",
+          "Maximum |MY|",
+          "Maximum |MZ|",
+          "Maximum resultant shear",
+          "Maximum resultant bending",
+          "Maximum compression"
+        ],
+        "plane": "X",
+        "head_deflection_in": 0.00388536723937363,
+        "results_folder": "footing-001\\depth-001\\case-001-X",
+        "checked_deflection_in": 0.00388536723937363
+      },
+      "force_envelopes": {
+        "shear": {
+          "absolute_value": 0.2051635875468498,
+          "signed_local_end_value": 0.2051635875468498,
+          "unit": "kip",
+          "depth_ft": 0.0,
+          "element": 1,
+          "end": "i",
+          "plane": "X",
+          "reaction": {
+            "model": "synthetic.rtd",
+            "group": "DEMO",
+            "node": 1,
+            "case": 101
+          },
+          "results_folder": "footing-001\\depth-001\\case-001-X"
+        },
+        "moment": {
+          "absolute_value": 0.737562149277475,
+          "signed_local_end_value": 0.737562149277475,
+          "unit": "kip-ft",
+          "depth_ft": 0.0,
+          "element": 1,
+          "end": "i",
+          "plane": "X",
+          "reaction": {
+            "model": "synthetic.rtd",
+            "group": "DEMO",
+            "node": 1,
+            "case": 101
+          },
+          "results_folder": "footing-001\\depth-001\\case-001-X"
+        }
+      },
+      "max_shear_kip": 0.2051635875468498,
+      "max_moment_kip_ft": 0.737562149277475,
+      "message": "First passing trial depth for selected extreme cases."
+    }
+  ],
+  "cancelled": false
+}

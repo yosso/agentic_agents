@@ -1,0 +1,265 @@
+{
+  "check_mode": "resultant",
+  "depth_increment_ft": 1.0,
+  "maximum_depth_ft": 60.0,
+  "case_selection": "All ties for component/resultant lateral and bending extremes, torsion, compression and uplift; coincident vectors retained.",
+  "limitations": [
+    "Load extremes do not guarantee the governing deflection over every combination.",
+    "Loaded elastic displacement is compared to the workbook allowable; residual/non-recoverable behavior is not evaluated.",
+    "Two independent 2D planes; resultant mode combines their head displacements. No torsional or axial soil capacity check.",
+    "Passing status means the configured deflection screen only, not complete design acceptance."
+  ],
+  "footings": [
+    {
+      "footing": "C",
+      "status": "deflection_pass",
+      "accepted_depth_ft": 9.0,
+      "trials": [
+        {
+          "depth_ft": 9.0,
+          "cases": [
+            {
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 1166,
+                "case": 20
+              },
+              "criteria": [
+                "Maximum compression"
+              ],
+              "plane": "X",
+              "head_deflection_in": -0.003750039867005951,
+              "results_folder": "footing-001\\depth-001\\case-001-X",
+              "checked_deflection_in": 0.0037555033636934134
+            },
+            {
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 1166,
+                "case": 20
+              },
+              "criteria": [
+                "Maximum compression"
+              ],
+              "plane": "Y",
+              "head_deflection_in": -0.00020250064340275378,
+              "results_folder": "footing-001\\depth-001\\case-001-Y",
+              "checked_deflection_in": 0.0037555033636934134
+            },
+            {
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 1166,
+                "case": 36
+              },
+              "criteria": [
+                "Maximum |FY|",
+                "Maximum |MX|",
+                "Maximum resultant shear",
+                "Maximum resultant bending"
+              ],
+              "plane": "X",
+              "head_deflection_in": 2.9571601577169596e-06,
+              "results_folder": "footing-001\\depth-001\\case-002-X",
+              "checked_deflection_in": 0.22228167186697248
+            },
+            {
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 1166,
+                "case": 36
+              },
+              "criteria": [
+                "Maximum |FY|",
+                "Maximum |MX|",
+                "Maximum resultant shear",
+                "Maximum resultant bending"
+              ],
+              "plane": "Y",
+              "head_deflection_in": 0.22228167184730194,
+              "results_folder": "footing-001\\depth-001\\case-002-Y",
+              "checked_deflection_in": 0.22228167186697248
+            },
+            {
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 30
+              },
+              "criteria": [
+                "Maximum |FX|",
+                "Maximum |MY|"
+              ],
+              "plane": "X",
+              "head_deflection_in": -0.003756858295441642,
+              "results_folder": "footing-001\\depth-001\\case-003-X",
+              "checked_deflection_in": 0.003756974721767271
+            },
+            {
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 30
+              },
+              "criteria": [
+                "Maximum |FX|",
+                "Maximum |MY|"
+              ],
+              "plane": "Y",
+              "head_deflection_in": 2.957715283089929e-05,
+              "results_folder": "footing-001\\depth-001\\case-003-Y",
+              "checked_deflection_in": 0.003756974721767271
+            },
+            {
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 36
+              },
+              "criteria": [
+                "Maximum |MZ|"
+              ],
+              "plane": "X",
+              "head_deflection_in": -2.9084149615589646e-06,
+              "results_folder": "footing-001\\depth-001\\case-004-X",
+              "checked_deflection_in": 0.22215634723025793
+            },
+            {
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 36
+              },
+              "criteria": [
+                "Maximum |MZ|"
+              ],
+              "plane": "Y",
+              "head_deflection_in": -0.22215634721121982,
+              "results_folder": "footing-001\\depth-001\\case-004-Y",
+              "checked_deflection_in": 0.22215634723025793
+            }
+          ],
+          "checked_deflection_in": 0.22228167186697248,
+          "passed": true
+        }
+      ],
+      "selected_cases": [
+        {
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 1166,
+            "case": 20
+          },
+          "criteria": [
+            "Maximum compression"
+          ]
+        },
+        {
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 1166,
+            "case": 36
+          },
+          "criteria": [
+            "Maximum |FY|",
+            "Maximum |MX|",
+            "Maximum resultant shear",
+            "Maximum resultant bending"
+          ]
+        },
+        {
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 591,
+            "case": 30
+          },
+          "criteria": [
+            "Maximum |FX|",
+            "Maximum |MY|"
+          ]
+        },
+        {
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 591,
+            "case": 36
+          },
+          "criteria": [
+            "Maximum |MZ|"
+          ]
+        }
+      ],
+      "allowable_in": 0.35640000000000005,
+      "soil_coverage_ft": 30.0,
+      "checked_deflection_in": 0.22228167186697248,
+      "governing_deflection": {
+        "reaction": {
+          "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+          "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+          "node": 1166,
+          "case": 36
+        },
+        "criteria": [
+          "Maximum |FY|",
+          "Maximum |MX|",
+          "Maximum resultant shear",
+          "Maximum resultant bending"
+        ],
+        "plane": "X",
+        "head_deflection_in": 2.9571601577169596e-06,
+        "results_folder": "footing-001\\depth-001\\case-002-X",
+        "checked_deflection_in": 0.22228167186697248
+      },
+      "force_envelopes": {
+        "shear": {
+          "absolute_value": 18.38020057016081,
+          "signed_local_end_value": -18.38020057016081,
+          "unit": "kip",
+          "depth_ft": 7.9750000000000005,
+          "element": 10,
+          "end": "i",
+          "plane": "Y",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 1166,
+            "case": 36
+          },
+          "results_folder": "footing-001\\depth-001\\case-002-Y"
+        },
+        "moment": {
+          "absolute_value": 65.66512875143637,
+          "signed_local_end_value": -65.66512875143637,
+          "unit": "kip-ft",
+          "depth_ft": 3.4999999999999996,
+          "element": 5,
+          "end": "i",
+          "plane": "Y",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 1166,
+            "case": 36
+          },
+          "results_folder": "footing-001\\depth-001\\case-002-Y"
+        }
+      },
+      "max_shear_kip": 18.38020057016081,
+      "max_moment_kip_ft": 65.66512875143637,
+      "message": "First passing trial depth for selected extreme cases."
+    }
+  ],
+  "cancelled": false
+}

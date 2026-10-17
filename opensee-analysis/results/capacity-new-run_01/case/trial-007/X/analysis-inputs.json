@@ -1,0 +1,487 @@
+{
+  "footing": "A",
+  "workbook": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\DVLP_FTG_MTL_QTY.xlsm",
+  "soil_table": "tblSOIL_BORING_01",
+  "source_units": {
+    "depth": "ft",
+    "density": "lb/ft^3",
+    "cohesion": "lb/ft^2",
+    "friction_angle": "degrees",
+    "subgrade_modulus": "lb/in^3",
+    "strain": "unitless"
+  },
+  "material": {
+    "E_psi": 4351132.131906504,
+    "unit_weight_pcf": 152.7811285023398,
+    "poisson_ratio": 0.2
+  },
+  "layers": [
+    {
+      "name": "SOFT CLAY",
+      "model": "API_clay",
+      "parameters": {
+        "kind": "static",
+        "eps50": 0.0538,
+        "J": 0.5,
+        "Su_psi": 6.944444444444809e-05
+      },
+      "used_fields": [
+        "start",
+        "end",
+        "model",
+        "density",
+        "cohesion_ultimate",
+        "e50"
+      ],
+      "source_cells": {
+        "start": "GEOTECH PARAMETERS!C8",
+        "end": "GEOTECH PARAMETERS!D8",
+        "model": "GEOTECH PARAMETERS!E8",
+        "density": "GEOTECH PARAMETERS!F8",
+        "cohesion_ultimate": "GEOTECH PARAMETERS!G8",
+        "cohesion_factored": "GEOTECH PARAMETERS!H8",
+        "friction_angle": "GEOTECH PARAMETERS!I8",
+        "k_static": "GEOTECH PARAMETERS!J8",
+        "k_cyclic": "GEOTECH PARAMETERS!K8",
+        "k_static_factored": "GEOTECH PARAMETERS!L8",
+        "e50": "GEOTECH PARAMETERS!M8",
+        "e50_factored": "GEOTECH PARAMETERS!N8"
+      },
+      "raw_properties": {
+        "start": 0,
+        "end": 2.5,
+        "model": "SOFT CLAY",
+        "density": 125,
+        "cohesion_ultimate": 0.01,
+        "cohesion_factored": 0.00666,
+        "friction_angle": 0,
+        "k_static": 0.01,
+        "k_cyclic": "-",
+        "k_static_factored": 0.00666,
+        "e50": 5.38,
+        "e50_factored": 8.07
+      },
+      "top_ft": -0.0,
+      "bottom_ft": -2.5,
+      "unit_weight_pcf": 125.00000000000001
+    },
+    {
+      "name": "SOFT CLAY",
+      "model": "API_clay",
+      "parameters": {
+        "kind": "static",
+        "eps50": 0.013300000000000001,
+        "J": 0.5,
+        "Su_psi": 6.944444444444808
+      },
+      "used_fields": [
+        "start",
+        "end",
+        "model",
+        "density",
+        "cohesion_ultimate",
+        "e50"
+      ],
+      "source_cells": {
+        "start": "GEOTECH PARAMETERS!C9",
+        "end": "GEOTECH PARAMETERS!D9",
+        "model": "GEOTECH PARAMETERS!E9",
+        "density": "GEOTECH PARAMETERS!F9",
+        "cohesion_ultimate": "GEOTECH PARAMETERS!G9",
+        "cohesion_factored": "GEOTECH PARAMETERS!H9",
+        "friction_angle": "GEOTECH PARAMETERS!I9",
+        "k_static": "GEOTECH PARAMETERS!J9",
+        "k_cyclic": "GEOTECH PARAMETERS!K9",
+        "k_static_factored": "GEOTECH PARAMETERS!L9",
+        "e50": "GEOTECH PARAMETERS!M9",
+        "e50_factored": "GEOTECH PARAMETERS!N9"
+      },
+      "raw_properties": {
+        "start": 2.5,
+        "end": 15,
+        "model": "SOFT CLAY",
+        "density": 125,
+        "cohesion_ultimate": 1000,
+        "cohesion_factored": 666,
+        "friction_angle": 0,
+        "k_static": 220,
+        "k_cyclic": "-",
+        "k_static_factored": 146.52,
+        "e50": 1.33,
+        "e50_factored": 1.995
+      },
+      "top_ft": -2.5,
+      "bottom_ft": -9.0,
+      "unit_weight_pcf": 125.00000000000001
+    }
+  ],
+  "reaction": {
+    "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+    "case": 20,
+    "node": 3,
+    "group": "SINGLE PHASE BUS SUPPORT",
+    "case_name": "CASE 1X (SC B AND C)",
+    "mark": "A",
+    "FX_kip": -4.356037163356595,
+    "FY_kip": -0.3361680640849382,
+    "FZ_kip": 5.153649327834737,
+    "MX_kip_ft": 6.563192273004446,
+    "MY_kip_ft": -35.60234670842478,
+    "MZ_kip_ft": 1.8585841656406676
+  },
+  "plane": "X",
+  "loads": {
+    "lateral_kip": -4.356037163356595,
+    "axial_kip": -5.153649327834738,
+    "moment_kip_ft": -35.60234670842478
+  },
+  "max_iterations": 100,
+  "settings": {
+    "footing": "A",
+    "reaction": {
+      "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+      "group": "SINGLE PHASE BUS SUPPORT",
+      "node": 3,
+      "case": 20
+    },
+    "plane": "X",
+    "load_signs": {
+      "lateral": 1,
+      "moment": 1,
+      "axial": -1
+    },
+    "embedment_ft": 9.0,
+    "mesh_size_ft": 1.0,
+    "max_iterations": 100,
+    "boundary": "free_head_axially_fixed_tip",
+    "material": {
+      "E_psi": 4351132.131906276,
+      "unit_weight_pcf": 152.7811285023398,
+      "poisson_ratio": 0.2
+    },
+    "soil_models": {
+      "SOFT CLAY": {
+        "model": "API_clay",
+        "kind": "static",
+        "cohesion": "cohesion_ultimate",
+        "strain": "e50",
+        "J": 0.5
+      },
+      "STIFF CLAY": {
+        "model": "API_clay",
+        "kind": "static",
+        "cohesion": "cohesion_ultimate",
+        "strain": "e50",
+        "J": 0.5
+      },
+      "PORUS LIMESTONE": {
+        "model": "API_clay",
+        "kind": "static",
+        "cohesion": "cohesion_ultimate",
+        "strain": "e50",
+        "J": 0.5
+      },
+      "SAND/GRAVEL": {
+        "model": "API_sand",
+        "kind": "static",
+        "modulus": "k_static"
+      }
+    },
+    "opensees": {
+      "load_steps": 20,
+      "drag_ratio": 0.0,
+      "transformation": "Linear",
+      "water_unit_weight_pcf": 62.4492862753314,
+      "energy_tolerance_lbf_ft": 7.375621492772653e-08
+    }
+  },
+  "allowable_deflection_in": 0.297,
+  "warnings": [
+    "One 2D plane only; torsion and the other plane are not analyzed.",
+    "Axial tip restraint is prescribed; no axial soil capacity or settlement check.",
+    "Computed displacement is not residual/non-recoverable deflection; no design pass/fail is issued.",
+    "PySimple1 is a backbone approximation; results need not equal OpenPile.",
+    "Elastic gross section; no cracking, reinforcement, self-weight loading or residual-deflection check."
+  ],
+  "preparation_findings": [
+    {
+      "severity": "WARNING",
+      "footing": "",
+      "source": "GEOTECH PARAMETERS",
+      "message": "Confirm ultimate/factored parameter selection before building soil springs."
+    },
+    {
+      "severity": "WARNING",
+      "footing": "B",
+      "source": "INPUT TABLES!F46",
+      "message": "Assignment 0.36 differs from diameter-table 0.35640000000000005; using DP WORKFLOW and GUIDELINES!D69."
+    },
+    {
+      "severity": "WARNING",
+      "footing": "C",
+      "source": "INPUT TABLES!F47",
+      "message": "Assignment 0.36 differs from diameter-table 0.35640000000000005; using DP WORKFLOW and GUIDELINES!D69."
+    },
+    {
+      "severity": "WARNING",
+      "footing": "",
+      "source": "Excel saved formula results",
+      "message": "Used 71 cached formula values. Recalculate/save Excel before preparation; this reader does not evaluate VBA/formulas."
+    }
+  ],
+  "opensees": {
+    "load_steps": 20,
+    "drag_ratio": 0.0,
+    "transformation": "Linear",
+    "water_unit_weight_pcf": 62.4492862753314,
+    "energy_tolerance_lbf_ft": 7.375621492772653e-08
+  },
+  "solver": "OpenSeesPy / elasticBeamColumn / PySimple1",
+  "springs": [
+    {
+      "node": 1,
+      "layer_index": 0,
+      "sample_depth_ft": 0.20833333333333331,
+      "tributary_length_ft": 0.41666666666666663,
+      "effective_stress_psi": 0.18084490740741688,
+      "soil_type": 1,
+      "pult_kip": 9.375000000000002e-05,
+      "y50_in": 4.035,
+      "Cd": 0.0
+    },
+    {
+      "node": 2,
+      "layer_index": 0,
+      "sample_depth_ft": 0.625,
+      "tributary_length_ft": 0.41666666666666663,
+      "effective_stress_psi": 0.5425347222222506,
+      "soil_type": 1,
+      "pult_kip": 9.375000000000002e-05,
+      "y50_in": 4.035,
+      "Cd": 0.0
+    },
+    {
+      "node": 2,
+      "layer_index": 0,
+      "sample_depth_ft": 1.0416666666666665,
+      "tributary_length_ft": 0.41666666666666663,
+      "effective_stress_psi": 0.9042245370370844,
+      "soil_type": 1,
+      "pult_kip": 9.375000000000002e-05,
+      "y50_in": 4.035,
+      "Cd": 0.0
+    },
+    {
+      "node": 3,
+      "layer_index": 0,
+      "sample_depth_ft": 1.4583333333333333,
+      "tributary_length_ft": 0.41666666666666663,
+      "effective_stress_psi": 1.2659143518519183,
+      "soil_type": 1,
+      "pult_kip": 9.375000000000002e-05,
+      "y50_in": 4.035,
+      "Cd": 0.0
+    },
+    {
+      "node": 3,
+      "layer_index": 0,
+      "sample_depth_ft": 1.875,
+      "tributary_length_ft": 0.41666666666666663,
+      "effective_stress_psi": 1.627604166666752,
+      "soil_type": 1,
+      "pult_kip": 9.375000000000002e-05,
+      "y50_in": 4.035,
+      "Cd": 0.0
+    },
+    {
+      "node": 4,
+      "layer_index": 0,
+      "sample_depth_ft": 2.2916666666666665,
+      "tributary_length_ft": 0.41666666666666663,
+      "effective_stress_psi": 1.9892939814815858,
+      "soil_type": 1,
+      "pult_kip": 9.375000000000002e-05,
+      "y50_in": 4.035,
+      "Cd": 0.0
+    },
+    {
+      "node": 4,
+      "layer_index": 1,
+      "sample_depth_ft": 2.732142857142857,
+      "tributary_length_ft": 0.46428571428571425,
+      "effective_stress_psi": 2.37165178571441,
+      "soil_type": 1,
+      "pult_kip": 4.512794961734694,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 5,
+      "layer_index": 1,
+      "sample_depth_ft": 3.196428571428571,
+      "tributary_length_ft": 0.46428571428571425,
+      "effective_stress_psi": 2.7746775793652247,
+      "soil_type": 1,
+      "pult_kip": 4.6879384566326525,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 5,
+      "layer_index": 1,
+      "sample_depth_ft": 3.660714285714286,
+      "tributary_length_ft": 0.46428571428571425,
+      "effective_stress_psi": 3.1777033730160396,
+      "soil_type": 1,
+      "pult_kip": 4.863081951530612,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 6,
+      "layer_index": 1,
+      "sample_depth_ft": 4.124999999999999,
+      "tributary_length_ft": 0.46428571428571425,
+      "effective_stress_psi": 3.580729166666854,
+      "soil_type": 1,
+      "pult_kip": 5.038225446428571,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 6,
+      "layer_index": 1,
+      "sample_depth_ft": 4.589285714285714,
+      "tributary_length_ft": 0.4642857142857146,
+      "effective_stress_psi": 3.983754960317669,
+      "soil_type": 1,
+      "pult_kip": 5.213368941326535,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 7,
+      "layer_index": 1,
+      "sample_depth_ft": 5.053571428571429,
+      "tributary_length_ft": 0.4642857142857146,
+      "effective_stress_psi": 4.386780753968484,
+      "soil_type": 1,
+      "pult_kip": 5.388512436224494,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 7,
+      "layer_index": 1,
+      "sample_depth_ft": 5.517857142857142,
+      "tributary_length_ft": 0.46428571428571425,
+      "effective_stress_psi": 4.789806547619298,
+      "soil_type": 1,
+      "pult_kip": 5.56365593112245,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 8,
+      "layer_index": 1,
+      "sample_depth_ft": 5.982142857142858,
+      "tributary_length_ft": 0.46428571428571425,
+      "effective_stress_psi": 5.1928323412701145,
+      "soil_type": 1,
+      "pult_kip": 5.738799426020409,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 8,
+      "layer_index": 1,
+      "sample_depth_ft": 6.446428571428572,
+      "tributary_length_ft": 0.4642857142857146,
+      "effective_stress_psi": 5.595858134920928,
+      "soil_type": 1,
+      "pult_kip": 5.913942920918373,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 9,
+      "layer_index": 1,
+      "sample_depth_ft": 6.9107142857142865,
+      "tributary_length_ft": 0.4642857142857146,
+      "effective_stress_psi": 5.998883928571744,
+      "soil_type": 1,
+      "pult_kip": 6.0890864158163325,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 9,
+      "layer_index": 1,
+      "sample_depth_ft": 7.375000000000001,
+      "tributary_length_ft": 0.46428571428571425,
+      "effective_stress_psi": 6.401909722222559,
+      "soil_type": 1,
+      "pult_kip": 6.2642299107142865,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 10,
+      "layer_index": 1,
+      "sample_depth_ft": 7.839285714285714,
+      "tributary_length_ft": 0.46428571428571425,
+      "effective_stress_psi": 6.804935515873373,
+      "soil_type": 1,
+      "pult_kip": 6.439373405612246,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 10,
+      "layer_index": 1,
+      "sample_depth_ft": 8.303571428571429,
+      "tributary_length_ft": 0.4642857142857135,
+      "effective_stress_psi": 7.207961309524187,
+      "soil_type": 1,
+      "pult_kip": 6.614516900510194,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    },
+    {
+      "node": 11,
+      "layer_index": 1,
+      "sample_depth_ft": 8.767857142857142,
+      "tributary_length_ft": 0.4642857142857135,
+      "effective_stress_psi": 7.6109871031750025,
+      "soil_type": 1,
+      "pult_kip": 6.789660395408152,
+      "y50_in": 0.9975,
+      "Cd": 0.0
+    }
+  ],
+  "diameter_ft": 2.5,
+  "embedment_ft": 9.0,
+  "water_elevation_ft": -12.0,
+  "mesh_ft": 1.0,
+  "node_depths_ft": [
+    0.0,
+    0.8333333333333333,
+    1.6666666666666665,
+    2.5,
+    3.4285714285714284,
+    4.357142857142857,
+    5.285714285714286,
+    6.214285714285714,
+    7.142857142857143,
+    8.071428571428573,
+    8.999999999999998
+  ],
+  "output_units": {
+    "length": "ft",
+    "displacement": "in",
+    "force": "kip",
+    "moment": "kip-ft",
+    "stress": "psi",
+    "rotation": "rad"
+  }
+}

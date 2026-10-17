@@ -1,0 +1,4 @@
+footing,status,accepted_depth_ft,allowable_in,checked_deflection_in,max_shear_kip,max_moment_kip_ft,message
+A,deflection_pass,9.0,0.297,0.2767302423915019,2.5126834675537846,10.629547355525089,First passing trial depth for selected extreme cases.
+B,deflection_pass,9.0,0.35640000000000005,0.07192303684672426,3.3108292014307867,18.458319991468418,First passing trial depth for selected extreme cases.
+C,error,,0.35640000000000005,,,,INPUT ERROR: tblSOIL_BORING_03 row 31: no explicit soil model mapping for 'PORUS LIMESTONE'.

@@ -1,0 +1,4 @@
+{
+  "valid": false,
+  "error": "tblSOIL_BORING_03 row 31: no explicit soil model mapping for 'PORUS LIMESTONE'."
+}

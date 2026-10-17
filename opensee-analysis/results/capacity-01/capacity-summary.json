@@ -1,0 +1,611 @@
+{
+  "footing": "C",
+  "depth_ft": 10.0,
+  "allowable_in": 0.35640000000000005,
+  "check": "sqrt(delta_X^2 + delta_Y^2)",
+  "loading": "case",
+  "searches": [
+    {
+      "path": "case",
+      "status": "bracketed",
+      "trials": [
+        {
+          "factor": 0.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.0,
+              "results_folder": "case\\trial-001\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.0,
+              "results_folder": "case\\trial-001\\Y"
+            }
+          ],
+          "deflection_in": 0.0,
+          "applied_shear_kip": 0.0,
+          "applied_moment_kip_ft": 0.0,
+          "passed": true
+        },
+        {
+          "factor": 1.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.0019915034866880427,
+              "results_folder": "case\\trial-002\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 2.251310058257281e-05,
+              "results_folder": "case\\trial-002\\Y"
+            }
+          ],
+          "deflection_in": 0.001991630733140175,
+          "applied_shear_kip": 0.30228391899047097,
+          "applied_moment_kip_ft": 1.0907429349013957,
+          "passed": true
+        },
+        {
+          "factor": 2.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.003983006911524945,
+              "results_folder": "case\\trial-003\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 4.5026201165082434e-05,
+              "results_folder": "case\\trial-003\\Y"
+            }
+          ],
+          "deflection_in": 0.003983261404433161,
+          "applied_shear_kip": 0.6045678379809419,
+          "applied_moment_kip_ft": 2.1814858698027915,
+          "passed": true
+        },
+        {
+          "factor": 4.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.007966013328381278,
+              "results_folder": "case\\trial-004\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 9.005240232964761e-05,
+              "results_folder": "case\\trial-004\\Y"
+            }
+          ],
+          "deflection_in": 0.00796652231422931,
+          "applied_shear_kip": 1.2091356759618839,
+          "applied_moment_kip_ft": 4.362971739605583,
+          "passed": true
+        },
+        {
+          "factor": 8.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.015932022699787364,
+              "results_folder": "case\\trial-005\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.00018010480465472569,
+              "results_folder": "case\\trial-005\\Y"
+            }
+          ],
+          "deflection_in": 0.015933040671736187,
+          "applied_shear_kip": 2.4182713519237677,
+          "applied_moment_kip_ft": 8.725943479211166,
+          "passed": true
+        },
+        {
+          "factor": 16.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.03186401375507293,
+              "results_folder": "case\\trial-006\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.00036020960927333996,
+              "results_folder": "case\\trial-006\\Y"
+            }
+          ],
+          "deflection_in": 0.03186604970099196,
+          "applied_shear_kip": 4.8365427038475355,
+          "applied_moment_kip_ft": 17.45188695842233,
+          "passed": true
+        },
+        {
+          "factor": 32.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.06372777471658764,
+              "results_folder": "case\\trial-007\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.0007204192182532534,
+              "results_folder": "case\\trial-007\\Y"
+            }
+          ],
+          "deflection_in": 0.06373184662457361,
+          "applied_shear_kip": 9.673085407695071,
+          "applied_moment_kip_ft": 34.90377391684466,
+          "passed": true
+        },
+        {
+          "factor": 64.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.12745351920263437,
+              "results_folder": "case\\trial-008\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.0014408384339954271,
+              "results_folder": "case\\trial-008\\Y"
+            }
+          ],
+          "deflection_in": 0.127461663148294,
+          "applied_shear_kip": 19.346170815390142,
+          "applied_moment_kip_ft": 69.80754783368933,
+          "passed": true
+        },
+        {
+          "factor": 128.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.26031300000569363,
+              "results_folder": "case\\trial-009\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.0028816768481687385,
+              "results_folder": "case\\trial-009\\Y"
+            }
+          ],
+          "deflection_in": 0.26032894966449954,
+          "applied_shear_kip": 38.692341630780284,
+          "applied_moment_kip_ft": 139.61509566737865,
+          "passed": true
+        },
+        {
+          "factor": 256.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.5931014749809906,
+              "results_folder": "case\\trial-010\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.0057633535379008095,
+              "results_folder": "case\\trial-010\\Y"
+            }
+          ],
+          "deflection_in": 0.5931294764793177,
+          "applied_shear_kip": 77.38468326156057,
+          "applied_moment_kip_ft": 279.2301913347573,
+          "passed": false
+        },
+        {
+          "factor": 192.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.3985713176289354,
+              "results_folder": "case\\trial-011\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.004322515222738682,
+              "results_folder": "case\\trial-011\\Y"
+            }
+          ],
+          "deflection_in": 0.3985947558289202,
+          "applied_shear_kip": 58.03851244617043,
+          "applied_moment_kip_ft": 209.422643501068,
+          "passed": false
+        },
+        {
+          "factor": 160.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.32904368244077475,
+              "results_folder": "case\\trial-012\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.0036020960416459093,
+              "results_folder": "case\\trial-012\\Y"
+            }
+          ],
+          "deflection_in": 0.32906339822301517,
+          "applied_shear_kip": 48.36542703847536,
+          "applied_moment_kip_ft": 174.5188695842233,
+          "passed": true
+        },
+        {
+          "factor": 176.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.3636968530055161,
+              "results_folder": "case\\trial-013\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.003962305633892904,
+              "results_folder": "case\\trial-013\\Y"
+            }
+          ],
+          "deflection_in": 0.3637184360904082,
+          "applied_shear_kip": 53.20196974232289,
+          "applied_moment_kip_ft": 191.97075654264563,
+          "passed": false
+        },
+        {
+          "factor": 168.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.3463440907353842,
+              "results_folder": "case\\trial-014\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.003782200838172719,
+              "results_folder": "case\\trial-014\\Y"
+            }
+          ],
+          "deflection_in": 0.3463647416099109,
+          "applied_shear_kip": 50.78369839039913,
+          "applied_moment_kip_ft": 183.24481306343446,
+          "passed": true
+        },
+        {
+          "factor": 172.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.35501374939097435,
+              "results_folder": "case\\trial-015\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.003872253236135346,
+              "results_folder": "case\\trial-015\\Y"
+            }
+          ],
+          "deflection_in": 0.3550348667409474,
+          "applied_shear_kip": 51.992834066361006,
+          "applied_moment_kip_ft": 187.60778480304003,
+          "passed": true
+        },
+        {
+          "factor": 174.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.35935359825895175,
+              "results_folder": "case\\trial-016\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.003917279435039227,
+              "results_folder": "case\\trial-016\\Y"
+            }
+          ],
+          "deflection_in": 0.3593749485701922,
+          "applied_shear_kip": 52.59740190434195,
+          "applied_moment_kip_ft": 189.78927067284286,
+          "passed": false
+        },
+        {
+          "factor": 173.0,
+          "cases": [
+            {
+              "plane": "X",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": -0.35718325099402304,
+              "results_folder": "case\\trial-017\\X"
+            },
+            {
+              "plane": "Y",
+              "reaction": {
+                "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+                "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+                "node": 591,
+                "case": 20
+              },
+              "head_deflection_in": 0.003894766335595784,
+              "results_folder": "case\\trial-017\\Y"
+            }
+          ],
+          "deflection_in": 0.35720448484792033,
+          "applied_shear_kip": 52.29511798535148,
+          "applied_moment_kip_ft": 188.69852773794145,
+          "passed": false
+        }
+      ],
+      "lower_passing_factor": 172.0,
+      "upper_failing_factor": 173.0,
+      "upper_deflection_in": 0.35720448484792033,
+      "passing_deflection_in": 0.3550348667409474,
+      "applied_shear_kip": 51.992834066361006,
+      "applied_moment_kip_ft": 187.60778480304003,
+      "passing_results": [
+        {
+          "plane": "X",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 591,
+            "case": 20
+          },
+          "head_deflection_in": -0.35501374939097435,
+          "results_folder": "case\\trial-015\\X"
+        },
+        {
+          "plane": "Y",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 591,
+            "case": 20
+          },
+          "head_deflection_in": 0.003872253236135346,
+          "results_folder": "case\\trial-015\\Y"
+        }
+      ],
+      "internal_force_envelopes": {
+        "shear": {
+          "absolute_value": 107.2834166115057,
+          "signed_local_end_value": 107.2834166115057,
+          "unit": "kip",
+          "depth_ft": 9.4,
+          "element": 12,
+          "end": "i",
+          "plane": "X",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 591,
+            "case": 20
+          },
+          "results_folder": "case\\trial-015\\X"
+        },
+        "moment": {
+          "absolute_value": 187.5981849503083,
+          "signed_local_end_value": -187.5981849503083,
+          "unit": "kip-ft",
+          "depth_ft": 0.0,
+          "element": 1,
+          "end": "i",
+          "plane": "X",
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 591,
+            "case": 20
+          },
+          "results_folder": "case\\trial-015\\X"
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Displacement-limited load along the chosen path, not structural shear/moment strength or complete design acceptance.",
+    "Independent 2D planes; loaded elastic displacement, not residual displacement.",
+    "Bracket search assumes a continuous monotonic displacement response along each path; no global maximum is established."
+  ]
+}

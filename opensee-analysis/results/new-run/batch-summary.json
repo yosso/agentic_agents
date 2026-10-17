@@ -1,0 +1,79 @@
+{
+  "check_mode": "resultant",
+  "depth_increment_ft": 1.0,
+  "maximum_depth_ft": 60.0,
+  "case_selection": "All ties for component/resultant lateral and bending extremes, torsion, compression and uplift; coincident vectors retained.",
+  "limitations": [
+    "Load extremes do not guarantee the governing deflection over every combination.",
+    "Loaded elastic displacement is compared to the workbook allowable; residual/non-recoverable behavior is not evaluated.",
+    "Two independent 2D planes; resultant mode combines their head displacements. No torsional or axial soil capacity check.",
+    "Passing status means the configured deflection screen only, not complete design acceptance."
+  ],
+  "footings": [
+    {
+      "footing": "C",
+      "status": "error",
+      "accepted_depth_ft": null,
+      "trials": [
+        {
+          "depth_ft": 9.0,
+          "cases": []
+        }
+      ],
+      "selected_cases": [
+        {
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 1166,
+            "case": 20
+          },
+          "criteria": [
+            "Maximum compression"
+          ]
+        },
+        {
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 1166,
+            "case": 36
+          },
+          "criteria": [
+            "Maximum |FY|",
+            "Maximum |MX|",
+            "Maximum resultant shear",
+            "Maximum resultant bending"
+          ]
+        },
+        {
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 591,
+            "case": 30
+          },
+          "criteria": [
+            "Maximum |FX|",
+            "Maximum |MY|"
+          ]
+        },
+        {
+          "reaction": {
+            "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+            "group": "THREE PHASE BUS SUPPORT (TYPE 2)",
+            "node": 591,
+            "case": 36
+          },
+          "criteria": [
+            "Maximum |MZ|"
+          ]
+        }
+      ],
+      "allowable_in": 0.35640000000000005,
+      "soil_coverage_ft": 30.0,
+      "message": "INPUT ERROR: tblSOIL_BORING_03 row 31: no explicit soil model mapping for 'PORUS LIMESTONE'."
+    }
+  ],
+  "cancelled": false
+}

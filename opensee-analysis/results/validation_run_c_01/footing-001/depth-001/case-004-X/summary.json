@@ -1,0 +1,26 @@
+{
+  "status": "converged",
+  "openseespy_version": "3.8.0.0",
+  "engine_version": "3.8.0",
+  "load_factor": 1.0000000000000002,
+  "steps": 20,
+  "design_pass": null,
+  "warnings": [
+    "One 2D plane only; torsion and the other plane are not analyzed.",
+    "Axial tip restraint is prescribed; no axial soil capacity or settlement check.",
+    "Computed displacement is not residual/non-recoverable deflection; no design pass/fail is issued.",
+    "PySimple1 is a backbone approximation; results need not equal OpenPile.",
+    "Elastic gross section; no cracking, reinforcement, self-weight loading or residual-deflection check."
+  ],
+  "output_units": {
+    "length": "ft",
+    "displacement": "in",
+    "force": "kip",
+    "moment": "kip-ft",
+    "rotation": "rad"
+  },
+  "head_deflection_in": -2.1068428698389993e-07,
+  "max_abs_deflection_in": 2.1929388159897109e-07,
+  "max_abs_shear_kip": 0.0006447485031373145,
+  "max_abs_moment_kip_ft": 0.003135145646014402
+}

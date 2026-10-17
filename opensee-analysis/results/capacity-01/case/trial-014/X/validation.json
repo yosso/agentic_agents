@@ -1,0 +1,10 @@
+{
+  "valid": true,
+  "warnings": [
+    "One 2D plane only; torsion and the other plane are not analyzed.",
+    "Axial tip restraint is prescribed; no axial soil capacity or settlement check.",
+    "Computed displacement is not residual/non-recoverable deflection; no design pass/fail is issued.",
+    "PySimple1 is a backbone approximation; results need not equal OpenPile.",
+    "Elastic gross section; no cracking, reinforcement, self-weight loading or residual-deflection check."
+  ]
+}

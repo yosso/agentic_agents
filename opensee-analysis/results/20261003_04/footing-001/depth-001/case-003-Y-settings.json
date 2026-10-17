@@ -1,0 +1,52 @@
+{
+  "footing": "A",
+  "reaction": {
+    "model": "D:\\SOURCE\\awatif_class\\agentic_agents\\inputs\\FP1_RIGID_BUS_VERSION_B_EXPANSION.rtd",
+    "group": "SINGLE PHASE BUS SUPPORT",
+    "node": 3,
+    "case": 36
+  },
+  "plane": "Y",
+  "load_signs": {
+    "lateral": 1,
+    "moment": 1,
+    "axial": -1
+  },
+  "embedment_ft": 9.0,
+  "mesh_size_ft": 1.0,
+  "max_iterations": 100,
+  "boundary": "free_head_axially_fixed_tip",
+  "material": {
+    "E_psi": 4351132.131906276,
+    "unit_weight_pcf": 152.7811285023398,
+    "poisson_ratio": 0.2
+  },
+  "soil_models": {
+    "SOFT CLAY": {
+      "model": "API_clay",
+      "kind": "static",
+      "cohesion": "cohesion_ultimate",
+      "strain": "e50",
+      "J": 0.5
+    },
+    "STIFF CLAY": {
+      "model": "API_clay",
+      "kind": "static",
+      "cohesion": "cohesion_ultimate",
+      "strain": "e50",
+      "J": 0.5
+    },
+    "SAND/GRAVEL": {
+      "model": "API_sand",
+      "kind": "static",
+      "modulus": "k_static"
+    }
+  },
+  "opensees": {
+    "load_steps": 20,
+    "drag_ratio": 0.0,
+    "transformation": "Linear",
+    "water_unit_weight_pcf": 62.4492862753314,
+    "energy_tolerance_lbf_ft": 7.375621492772653e-08
+  }
+}

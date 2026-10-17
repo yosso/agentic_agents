@@ -1,0 +1,2 @@
+footing,status,accepted_depth_ft,allowable_in,checked_deflection_in,max_shear_kip,max_moment_kip_ft,message
+C,error,,0.35640000000000005,,,,INPUT ERROR: tblSOIL_BORING_03 row 31: no explicit soil model mapping for 'PORUS LIMESTONE'.

@@ -1,0 +1,2 @@
+footing,status,accepted_depth_ft,allowable_in,checked_deflection_in,max_shear_kip,max_moment_kip_ft,message
+C,deflection_pass,9.0,0.35640000000000005,0.22228167186697248,18.38020057016081,65.66512875143637,First passing trial depth for selected extreme cases.
