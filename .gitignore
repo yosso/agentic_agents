@@ -1,4 +1,7 @@
 # Temporary Excel lock files (in any folder)
 ~$*
+__pycache__/
+*.pyc
+opensee-analysis/results/
 inputs/DVLP_FTG_MTL_QTY.xlsm
 inputs/TEST_SUB_LAT_PILE_PY.xlsm
