@@ -45,7 +45,7 @@ For `API_sand`, supply `kind` and `modulus`: static curves use `k_static` or `k_
 {"SAND": {"model": "API_sand", "kind": "static", "modulus": "k_static"}}
 ```
 
-Rock and other constitutive models are not implemented in this first version and block analysis when selected. Original soil values and cell references are carried into the converted analysis inputs, which also list fields actually used. The CLI converts ft to m, lb/ft^3 to kN/m^3, kip/ft^2 to kPa, lb/in^3 to kN/m^3, and N/N-m to kN/kN-m. Positive-downward soil depths become negative elevations. Unit declarations must match the prepared schema.
+Rock and other constitutive models are not implemented in this first version and block analysis when selected. Original soil values and cell references are carried into the converted analysis inputs, which also list fields actually used. The CLI converts ft to m, lb/ft^3 to kN/m^3, lb/ft^2 to kPa, lb/in^3 to kN/m^3, and N/N-m to kN/kN-m. Positive-downward soil depths become negative elevations. Unit declarations must match the prepared schema.
 
 ## Outputs and checks
 
@@ -65,3 +65,8 @@ Implementation references: [OpenPile usage](https://openpile.readthedocs.io/en/l
 
 
 Alternative solver: [OpenSeesPy CLI](../openseespy-cli/README.md). Both CLIs share prepared-input validation and conversions in `rsa-reaction-viewer/pile_analysis_inputs.py`; the OpenSeesPy runtime does not depend on OpenPile.
+
+
+## Node.js interface and exposed pier length
+
+The [local Node.js app](../openpile-analysis/README.md) provides prepared-input upload, settings, single-case analysis, and batch depth sizing through this CLI. Set `projection_height_ft` to the exposed pier height; its default is 1 ft when omitted. Zero gives a flush head. The beam extends above ground, loads act at that raised head, and the embedded soil profile remains at ground level. Head deflection is reported at the raised head. Older settings now default to a 1 ft projection; use zero explicitly to reproduce earlier flush-head runs. If a converged case has no nonzero support reactions, its reactions CSV can contain headers only.

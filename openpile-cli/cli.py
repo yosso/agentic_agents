@@ -12,7 +12,13 @@ import sys
 # Reuse the project's typed soil schema without importing the desktop application.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'rsa-reaction-viewer'))
 
-from pile_analysis_inputs import prepare, number, choose, FT, KSF_KPA, PCI_KNM3
+from pile_analysis_inputs import prepare as prepare_common, number, choose, FT, PSF_KPA, PCI_KNM3
+
+
+def prepare(document, settings):
+    plan = prepare_common(document, settings)
+    plan['projection_height_m'] = number(settings.get('projection_height_ft', 1), 'projection_height_ft', 0) * FT
+    return plan
 
 
 def solve(plan, output):
@@ -29,7 +35,7 @@ def solve(plan, output):
     mat = plan['material']
     pile = Pile(name=plan['footing'], material=PileMaterial(name='User material',
                 E=mat['E_kpa'], nu=mat['poisson_ratio'], uw=mat['unit_weight_kn_m3']),
-                sections=[CircularPileSection(top=0, bottom=-plan['embedment_m'], diameter=plan['diameter_m'])])
+                sections=[CircularPileSection(top=plan['projection_height_m'], bottom=-plan['embedment_m'], diameter=plan['diameter_m'])])
     models = {'API_clay': API_clay, 'API_sand': API_sand}
     layers = [Layer(name=l['name'], top=l['top'], bottom=l['bottom'], weight=l['weight'],
                     lateral_model=models[l['model']](**l['parameters'])) for l in plan['layers']]
@@ -38,7 +44,7 @@ def solve(plan, output):
                   element_type='EulerBernoulli', distributed_moment=False, distributed_axial=False,
                   base_shear=False, base_moment=False, base_axial=False)
     model.set_support(elevation=-plan['embedment_m'], Tz=True)
-    model.set_pointload(elevation=0, **plan['loads'])
+    model.set_pointload(elevation=plan['projection_height_m'], **plan['loads'])
     solver_log = io.StringIO()
     try:
         with redirect_stdout(solver_log):
@@ -53,7 +59,7 @@ def solve(plan, output):
     details = result.details()
     frames = dict(displacements=result.displacements, forces=result.forces, reactions=result.reactions)
     for name, frame in frames.items():
-        if frame is None or frame.empty:
+        if frame is None or (frame.empty and name != 'reactions'):
             raise RuntimeError(f'Solver returned no {name}.')
         if not all(math.isfinite(float(v)) for v in frame.select_dtypes(include='number').to_numpy().flat):
             raise RuntimeError(f'Solver returned non-finite {name}.')

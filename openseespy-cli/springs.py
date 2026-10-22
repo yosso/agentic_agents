@@ -53,18 +53,21 @@ def mesh_and_springs(plan):
     length. Separate springs preserve the two soils at an interface node.
     This also avoids an arbitrary zero-depth sand spring.
     """
-    boundaries = {0.0, plan['embedment_m']}
+    projection = plan.get('projection_height_m', 0.0)
+    boundaries = {-projection, 0.0, plan['embedment_m']}
     boundaries.update(-layer['bottom'] for layer in plan['layers'])
     water = -plan['water_elevation_m']
     if 0 < water < plan['embedment_m']:
         boundaries.add(water)
     edges = sorted(boundaries)
-    nodes = [0.0]
+    nodes = [edges[0]]
     for start, end in zip(edges, edges[1:]):
         count = math.ceil((end - start) / plan['mesh_m'])
         nodes.extend(start + (end - start) * i / count for i in range(1, count + 1))
     springs = []
     for i, (start, end) in enumerate(zip(nodes, nodes[1:])):
+        if end <= 0:
+            continue  # Exposed beam has no soil springs. Ground remains a mesh node.
         length = (end - start) / 2
         for node, depth in ((i + 1, start + length / 2), (i + 2, end - length / 2)):
             layer_index, layer = next((j, l) for j, l in enumerate(plan['layers']) if -l['top'] <= depth < -l['bottom'])

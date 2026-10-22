@@ -17,8 +17,8 @@ class SoilParameters:
     end: float | None  # ft
     model: str  # e.g. SOFT CLAY, SAND, ROCK
     density: float | None  # lb/ft^3
-    cohesion_ultimate: float | None  # kip/ft^2
-    cohesion_factored: float | None  # kip/ft^2
+    cohesion_ultimate: float | None  # lb/ft^2
+    cohesion_factored: float | None  # lb/ft^2
     friction_angle: float | None  # degrees
     k_static: float | None  # lb/in^3
     k_cyclic: float | None  # lb/in^3

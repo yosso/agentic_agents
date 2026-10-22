@@ -17,6 +17,16 @@ class SettingsTests(unittest.TestCase):
     def build(self):
         return build_settings(self.piers[0], self.piers[0]['reactions'][0], self.fields, self.soils)
 
+    def test_projection_is_saved_and_validated(self):
+        self.assertEqual(self.build()['projection_height_ft'], 1)
+        self.fields['projection_height_ft'] = '2.5'
+        self.assertEqual(self.build()['projection_height_ft'], 2.5)
+        self.fields['projection_height_ft'] = '0'
+        self.assertEqual(self.build()['projection_height_ft'], 0)
+        self.fields['projection_height_ft'] = '-1'
+        with self.assertRaises(ValueError):
+            self.build()
+
     def test_concrete_modulus_is_saved_and_validated(self):
         self.assertEqual(concrete_modulus('10000'), 5_700_000)
         modulus = concrete_modulus('4000')

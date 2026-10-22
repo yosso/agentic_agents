@@ -36,5 +36,6 @@
     "transformation": "Linear",
     "water_unit_weight_pcf": 62.4492862753314,
     "energy_tolerance_lbf_ft": 7.375621492772653e-08
-  }
+  },
+  "projection_height_ft": 1
 }

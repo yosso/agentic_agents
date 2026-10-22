@@ -4,15 +4,19 @@ from pathlib import Path
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
-from model import ROOT, build_settings, check_prepared, concrete_modulus, defaults, read_source, save_settings, soil_labels, soil_layer_details, suggested_soil_model
+# Load by path so this reusable editor can coexist with other apps' model.py.
+import importlib.util
+_spec = importlib.util.spec_from_file_location('_pile_settings_model', Path(__file__).with_name('model.py'))
+_settings_model = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_settings_model)
+ROOT, build_settings, check_prepared, concrete_modulus, defaults, read_source, save_settings, soil_labels, soil_layer_details, suggested_soil_model = (
+    getattr(_settings_model, key) for key in ('ROOT', 'build_settings', 'check_prepared', 'concrete_modulus', 'defaults', 'read_source', 'save_settings', 'soil_labels', 'soil_layer_details', 'suggested_soil_model'))
 
 
-class SettingsBuilder(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        self.title('Pile settings builder — OpenSeesPy')
-        self.geometry('1180x820')
-        self.minsize(950, 680)
+class SettingsEditor(ttk.Frame):
+    def __init__(self, master, integrated=False):
+        super().__init__(master)
+        self.integrated = integrated
         self.document = None
         self.source_path = None
         self.piers = []
@@ -22,13 +26,14 @@ class SettingsBuilder(tk.Tk):
         outer = ttk.Frame(self, padding=16)
         outer.pack(fill='both', expand=True)
         ttk.Label(outer, text='Create pile analysis settings', font=('Segoe UI', 18, 'bold')).pack(anchor='w')
-        ttk.Label(outer, text='Open results → choose footing and reaction → edit material and soils → save settings.json').pack(anchor='w', pady=(4, 12))
+        ttk.Label(outer, text='Review shared material and soil settings. Batch analysis selects reactions, both planes and trial depths automatically.' if integrated else 'Open results → choose footing and reaction → edit material and soils → save settings.json').pack(anchor='w', pady=(4, 12))
         bar = ttk.Frame(outer)
-        bar.pack(fill='x')
+        if not integrated:
+            bar.pack(fill='x')
         ttk.Button(bar, text='Open results / prepared inputs…', command=self.open_source).pack(side='left')
         self.source_label = ttk.Label(bar, text='No file loaded')
         self.source_label.pack(side='left', padx=12)
-        tabs = ttk.Notebook(outer)
+        tabs = self.tabs = ttk.Notebook(outer)
         tabs.pack(fill='both', expand=True, pady=12)
         selection = ttk.Frame(tabs, padding=12)
         analysis = ttk.Frame(tabs, padding=12)
@@ -43,13 +48,23 @@ class SettingsBuilder(tk.Tk):
         self.footing_box.bind('<<ComboboxSelected>>', self.select_footing)
         self.pier_info = ttk.Label(selection, text='', wraplength=1000)
         self.pier_info.pack(anchor='w', pady=8)
-        ttk.Label(selection, text='Select one coincident reaction row. Forces: N; moments: N-m. Scroll horizontally for all components.').pack(anchor='w')
+        ttk.Label(selection, text='Select one coincident reaction row. Scroll horizontally for all components.').pack(anchor='w')
+        unit_controls = ttk.Frame(selection)
+        unit_controls.pack(anchor='w', pady=5)
+        ttk.Label(unit_controls, text='Load display units:').pack(side='left')
+        self.units = tk.StringVar(value='kip / kip-ft')
+        unit_box = ttk.Combobox(unit_controls, textvariable=self.units,
+                               values=('kip / kip-ft', 'kN / kN-m', 'N / N-m'),
+                               state='readonly', width=16)
+        unit_box.pack(side='left', padx=8)
+        unit_box.bind('<<ComboboxSelected>>', self.render_reactions)
         columns = ('node', 'case', 'case_name', 'group', 'model', 'FX', 'FY', 'FZ', 'MX', 'MY', 'MZ')
         table_frame = ttk.Frame(selection)
         table_frame.pack(fill='both', expand=True)
         self.reactions = ttk.Treeview(table_frame, columns=columns, show='headings', selectmode='browse')
         for key in columns:
-            self.reactions.heading(key, text=key)
+            unit = ' (kip)' if key in ('FX', 'FY', 'FZ') else ' (kip-ft)' if key in ('MX', 'MY', 'MZ') else ''
+            self.reactions.heading(key, text=key + unit)
             self.reactions.column(key, width=170 if key in ('model', 'group', 'case_name') else 95, stretch=False)
         self.reactions.grid(row=0, column=0, sticky='nsew')
         ybar = ttk.Scrollbar(table_frame, orient='vertical', command=self.reactions.yview)
@@ -65,6 +80,7 @@ class SettingsBuilder(tk.Tk):
         definitions = [
             ('E_psi', 'Modulus of elasticity (psi)', None),
             ('embedment_ft', 'Trial embedment (ft)', None),
+            ('projection_height_ft', 'Projection above ground (ft)', None),
             ('mesh_size_ft', 'Mesh size (ft)', None),
             ('plane', 'Plane: X = FX/MY; Y = FY/MX', ('X', 'Y')),
             ('lateral', 'Lateral load sign', ('1', '-1')),
@@ -122,7 +138,8 @@ class SettingsBuilder(tk.Tk):
         actions = ttk.Frame(outer)
         actions.pack(fill='x')
         ttk.Button(actions, text='Preview & validate', command=self.preview_settings).pack(side='left')
-        ttk.Button(actions, text='Save settings.json…', command=self.save).pack(side='right')
+        if not integrated:
+            ttk.Button(actions, text='Save settings.json…', command=self.save).pack(side='right')
 
     def calculate_concrete(self, event=None):
         try:
@@ -139,6 +156,11 @@ class SettingsBuilder(tk.Tk):
         if not path:
             return
         try:
+            self.load_source(path)
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            messagebox.showerror('Cannot open source', str(exc))
+
+    def load_source(self, path):
             document, piers, prepared = read_source(path)
             self.document, self.piers, self.prepared = document, piers, prepared
             self.source_path = Path(path)
@@ -146,22 +168,46 @@ class SettingsBuilder(tk.Tk):
             self.footing_box.configure(values=[p['footing'] for p in piers])
             self.footing_box.current(0)
             self.select_footing()
-        except (OSError, ValueError, KeyError, TypeError) as exc:
-            messagebox.showerror('Cannot open source', str(exc))
 
     def selected_pier(self):
         return self.piers[self.footing_box.current()]
 
+    def render_reactions(self, event=None):
+        selected = self.reactions.selection()
+        force_unit, moment_unit = self.units.get().split(' / ')
+        for key in self.reactions['columns']:
+            unit = force_unit if key in ('FX', 'FY', 'FZ') else moment_unit if key in ('MX', 'MY', 'MZ') else ''
+            self.reactions.heading(key, text=f'{key} ({unit})' if unit else key)
+        if not self.piers:
+            return
+        self.reactions.delete(*self.reactions.get_children())
+        for index, row in enumerate(self.selected_pier()['reactions']):
+            displayed = dict(row)
+            for key in ('FX', 'FY', 'FZ', 'MX', 'MY', 'MZ'):
+                if isinstance(row.get(key), (int, float)):
+                    factor = (4448.2216152605 * (0.3048 if key.startswith('M') else 1)
+                              if force_unit == 'kip' else 1000 if force_unit == 'kN' else 1)
+                    displayed[key] = f'{row[key] / factor:.6g}'
+            self.reactions.insert('', 'end', iid=str(index), values=[displayed.get(k, '') for k in self.reactions['columns']])
+        if event is not None and selected and self.reactions.exists(selected[0]):
+            self.reactions.selection_set(selected[0])
+            self.reactions.focus(selected[0])
+            self.reactions.see(selected[0])
+
     def select_footing(self, event=None):
         pier = self.selected_pier()
-        self.reactions.delete(*self.reactions.get_children())
-        for index, row in enumerate(pier['reactions']):
-            self.reactions.insert('', 'end', iid=str(index), values=[f'{row[k]:.6g}' if isinstance(row.get(k), float) else row.get(k, '') for k in self.reactions['columns']])
+        self.render_reactions()
+        previous = {label: {k: v.get() for k, v in fields.items()} for label, fields in self.soils.items()} if self.integrated else {}
         self.soils = {}
         for widget in self.soil_frame.winfo_children():
             widget.destroy()
-        for label in soil_labels(self.document, pier):
+        labels = list(dict.fromkeys(label for p in self.piers for label in soil_labels(self.document, p))) if self.integrated else soil_labels(self.document, pier)
+        for label in labels:
             self.add_soil_row(label)
+            for key, value in previous.get(label, {}).items():
+                self.soils[label][key].set(value)
+        if self.integrated and self.reactions.get_children():
+            self.reactions.selection_set(self.reactions.get_children()[0])
         if self.prepared:
             self.pier_info.configure(text=f"Diameter: {pier.get('diameter_ft')} ft · Minimum depth: {pier.get('minimum_embedment_ft')} ft · Water depth: {pier.get('water_table_depth_ft')} ft · Soil table: {pier.get('soil_table')}")
             if pier.get('minimum_embedment_ft') is not None:
@@ -183,7 +229,17 @@ class SettingsBuilder(tk.Tk):
         fields = self.soils[label] = {}
         content = ttk.Frame(box)
         content.pack(fill='x')
-        details = soil_layer_details(self.document or {}, self.selected_pier() if self.piers else {}, label)
+        if self.integrated:
+            details = []
+            seen_tables = set()
+            for pier in self.piers:
+                table = pier.get('soil_table')
+                if table in seen_tables:
+                    continue
+                seen_tables.add(table)
+                details.extend(f'{table} | {detail}' for detail in soil_layer_details(self.document or {}, pier, label))
+        else:
+            details = soil_layer_details(self.document or {}, self.selected_pier() if self.piers else {}, label)
         ttk.Label(content, text='Layers using this label (depths below ground):' if details else 'No source layers available for this label. This entry only maps a label to a spring model.').pack(anchor='w', pady=(0, 4))
         for detail in details:
             ttk.Label(content, text=detail, wraplength=900).pack(anchor='w', pady=(0, 4))
@@ -226,6 +282,8 @@ class SettingsBuilder(tk.Tk):
         if self.document is None:
             raise ValueError('Open a source JSON file first.')
         selected = self.reactions.selection()
+        if not selected and self.integrated and self.reactions.get_children():
+            selected = (self.reactions.get_children()[0],)
         if not selected:
             raise ValueError('Select a reaction row on the first tab.')
         pier = self.selected_pier()
@@ -275,6 +333,16 @@ class SettingsBuilder(tk.Tk):
                 self.status.set(f'Saved {"draft" if status.startswith("DRAFT") else "settings"}: {path}')
             except (OSError, ValueError) as exc:
                 messagebox.showerror('Cannot save settings', str(exc))
+
+
+class SettingsBuilder(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title('Pile settings builder — OpenSeesPy')
+        self.geometry('1180x820')
+        self.minsize(950, 680)
+        self.editor = SettingsEditor(self)
+        self.editor.pack(fill='both', expand=True)
 
 
 if __name__ == '__main__':

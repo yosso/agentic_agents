@@ -93,7 +93,7 @@ The pile is a solid circular elastic Euler-Bernoulli beam, with A = pi D^2/4 and
 
 For plane X the selected coincident loads are FX, MY, FZ; for plane Y they are FY, MX, FZ. The explicit sign multipliers must be reviewed for each RSA reaction convention. The common converted Py/Pz/Mx vector becomes OpenSees global Fx/Fy/Mz with the same handedness. Positive axial force is upward. Do not reuse example signs as unreviewed project defaults.
 
-This CLI uses kN and m internally; OpenSeesPy itself accepts consistent unit systems. This CLI converts ft to m, lb/ft^3 to kN/m^3, kip/ft^2 to kPa, lb/in^3 to kN/m^3, and N/N-m to kN/kN-m. Strain remains a unitless fraction. The shared adapter retains the existing minimum total-soil-unit-weight check of 10 kN/m^3.
+This CLI uses kN and m internally; OpenSeesPy itself accepts consistent unit systems. This CLI converts ft to m, lb/ft^3 to kN/m^3, lb/ft^2 to kPa, lb/in^3 to kN/m^3, and N/N-m to kN/kN-m. Strain remains a unitless fraction. The shared adapter retains the existing minimum total-soil-unit-weight check of 10 kN/m^3.
 
 ## Soil springs
 
@@ -130,3 +130,10 @@ openseespy-cli/.venv/Scripts/python -m unittest discover -s openseespy-cli -v
 Tests exercise clay/sand analyses, global force equilibrium, elastic cantilever deflection versus PL^3/(3EI), failed-step handling, layer-interface tributaries, water stress, and validation. Solver tests skip when OpenSeesPy is absent. These are implementation checks, not site-specific design validation.
 
 References: [PySimple1](https://openseespydoc.readthedocs.io/en/latest/src/PySimple1.html), [elasticBeamColumn](https://openseespydoc.readthedocs.io/en/latest/src/elasticBeamColumn.html), [zeroLength](https://openseespydoc.readthedocs.io/en/latest/src/ZeroLength.html), and the mathematical capacity/half-displacement relations in [OpenSees PySimple1Gen](https://github.com/OpenSees/OpenSees/blob/master/SRC/material/uniaxial/PY/PySimple1Gen.cpp). The spring calculations are separate from the uploaded learning example and from the OpenPile runtime.
+
+
+### Pier projection above ground
+
+In Step 1 > Analysis settings, set **Projection above ground (ft)** (`projection_height_ft` in settings JSON). The default is **1 ft (12 inches)**, including settings files that omit this field. Zero is allowed for a flush pier head; negative or non-finite heights are rejected.
+
+Trial embedment remains the depth below ground. Total modeled pier length is embedment plus projection. The exposed beam has no soil springs, the applied reaction vector acts at the raised pier head, and head deflection is measured there. This introduces the exposed-length lever arm into the analysis. Supply head-level loads; do not also add that lever arm to the input moment. Ground and soil elevations remain unchanged. Batch depth searches and fixed-embedment load-limit searches retain the projection setting.

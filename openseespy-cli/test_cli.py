@@ -56,6 +56,15 @@ class InputTests(unittest.TestCase):
         material['E_kpa'] = 30_000_000
         self.assertEqual(prepare(self.document, self.settings)['material']['E_kpa'], 30_000_000)
 
+    def test_cohesion_psf_conversion_and_stale_ksf_rejected(self):
+        soil = self.document['soil_profiles'][0]['layers'][0]['properties']
+        soil['cohesion_ultimate'] = 1000
+        plan = prepare(self.document, self.settings)
+        self.assertAlmostEqual(plan['layers'][0]['parameters']['Su'], 47.88025898033584)
+        self.document['soil_profiles'][0]['units']['cohesion'] = 'kip/ft^2'
+        with self.assertRaisesRegex(ValueError, 'Soil units'):
+            prepare(self.document, self.settings)
+
     def test_invalid_or_ambiguous_modulus_rejected(self):
         material = self.settings['material']
         for value in (0, -1, True, '4000000', float('nan'), float('inf')):
@@ -70,6 +79,19 @@ class InputTests(unittest.TestCase):
         del material['E_kpa']
         with self.assertRaisesRegex(ValueError, 'exactly one'):
             prepare(self.document, self.settings)
+
+    def test_projection_default_zero_and_invalid(self):
+        self.settings.pop('projection_height_ft', None)
+        plan = prepare(self.document, self.settings)
+        self.assertAlmostEqual(plan['node_depths_m'][0], -0.3048)
+        self.assertIn(0, plan['node_depths_m'])
+        self.assertTrue(all(plan['node_depths_m'][s['node']-1] >= 0 for s in plan['springs']))
+        self.settings['projection_height_ft'] = 0
+        self.assertEqual(prepare(self.document, self.settings)['node_depths_m'][0], 0)
+        for value in (-1, float('nan'), float('inf')):
+            self.settings['projection_height_ft'] = value
+            with self.assertRaises(ValueError):
+                prepare(self.document, self.settings)
 
     def test_layer_boundary_keeps_separate_soils(self):
         import copy
@@ -123,6 +145,25 @@ class SolverTests(unittest.TestCase):
                     reactions = list(csv.DictReader(stream))
                 self.assertAlmostEqual(sum(float(r['Fx [kip]']) for r in reactions), -plan['loads']['Py'] / KN_PER_KIP, places=5)
                 self.assertAlmostEqual(sum(float(r['Fy [kip]']) for r in reactions), -plan['loads']['Pz'] / KN_PER_KIP, places=5)
+
+    def test_projection_adds_ground_moment_and_head_deflection(self):
+        reaction = self.document['piers'][0]['reactions'][0]
+        reaction.update(MX=0, MY=0, FZ=0)
+        values = []
+        with tempfile.TemporaryDirectory() as folder:
+            for height in (0, 1):
+                self.settings['projection_height_ft'] = height
+                plan = prepare(self.document, self.settings)
+                output = Path(folder)/str(height)
+                output.mkdir()
+                values.append(abs(solve(plan, output)['head_deflection_in']))
+                if height:
+                    with (output/'forces.csv').open() as stream:
+                        rows = list(csv.DictReader(stream))
+                    ground = [r for r in rows if abs(float(r['Elevation [ft]'])) < 1e-8]
+                    expected = abs(plan['loads']['Py']) / 4.4482216152605 * height
+                    self.assertAlmostEqual(abs(float(ground[0]['M_local [kip-ft]'])), expected, places=6)
+            self.assertGreater(values[1], values[0])
 
     def test_failed_step_does_not_export_success(self):
         import openseespy.opensees as ops

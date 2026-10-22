@@ -79,7 +79,7 @@ def boring_key(value):
 
 SOIL_FIELDS = {
     'START': 'start', 'END': 'end', 'MODEL': 'model', 'DENSITY': 'density',
-    'COHESION ULT.(KSF)': 'cohesion_ultimate', 'COHESION FACT.': 'cohesion_factored',
+    'COHESION ULT.(PSF)': 'cohesion_ultimate', 'COHESION FACT.(PSF)': 'cohesion_factored',
     'FRICTION ANGLE': 'friction_angle', 'MODULUS OF SUBGRADE REACTION (STATIC)': 'k_static',
     'MODULUS OF SUBGRADE REACTION (CYCLIC)': 'k_cyclic',
     'FKH': 'k_static_factored',

@@ -39,6 +39,22 @@ class SolverTests(unittest.TestCase):
                 solve(prepare(self.doc, self.settings), output)
             self.assertFalse((output / 'forces.csv').exists())
 
+    def test_exposed_projection_moves_load_and_increases_deflection(self):
+        import csv
+        self.doc['piers'][0]['reactions'][0].update(MX=0, MY=0, FZ=0)
+        deflections = []
+        with tempfile.TemporaryDirectory() as folder:
+            for height in (0, 1):
+                self.settings['projection_height_ft'] = height
+                output = Path(folder)/str(height)
+                output.mkdir()
+                summary = solve(prepare(self.doc, self.settings), output)
+                deflections.append(abs(summary['head_deflection_in']))
+                with (output/'displacements.csv').open() as stream:
+                    first = next(csv.DictReader(stream))
+                self.assertAlmostEqual(float(first['Elevation [m]']), height * .3048)
+        self.assertGreater(deflections[1], deflections[0])
+
     def test_elastic_cantilever_against_closed_form(self):
         os.environ.setdefault('MPLBACKEND', 'Agg')
         from openpile.construct import Pile, CircularPileSection, Model

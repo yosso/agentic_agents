@@ -79,7 +79,7 @@ def soil_layer_details(document, pier, label):
         values = layer['properties']
         details.append(
             f"Layer {index} | Excel row {layer['source_row']} | {display(values['start'])}-{display(values['end'])} ft | label: {label}\n"
-            f"Su ultimate/factored {display(values['cohesion_ultimate'])}/{display(values['cohesion_factored'])} kip/ft^2; "
+            f"Su ultimate/factored {display(values['cohesion_ultimate'])}/{display(values['cohesion_factored'])} lb/ft^2; "
             f"e50/factored {display(values['e50'])}/{display(values['e50_factored'])}; "
             f"phi {display(values['friction_angle'])} deg; k-static/factored "
             f"{display(values['k_static'])}/{display(values['k_static_factored'])} lb/in^3")
@@ -115,6 +115,7 @@ def build_settings(pier, reaction, fields, soils):
     result['plane'] = fields['plane']
     for key in ('embedment_ft', 'mesh_size_ft', 'max_iterations'):
         result[key] = positive(fields[key], key, integer=key == 'max_iterations')
+    result['projection_height_ft'] = positive(fields.get('projection_height_ft', 1), 'Projection above ground (ft)', zero=True)
     result['material'] = {key: positive(fields[key], key, zero=key == 'poisson_ratio')
                           for key in ('E_psi', 'unit_weight_pcf', 'poisson_ratio')}
     if result['material']['poisson_ratio'] >= .5:

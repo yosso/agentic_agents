@@ -9,11 +9,11 @@ from soil_parameters import SoilParameters
 FT = 0.3048
 LBF_KN = 0.0044482216152605
 PSI_KPA = LBF_KN / 0.0254**2
-KSF_KPA = 1000 * LBF_KN / FT**2
+PSF_KPA = LBF_KN / FT**2
 PCF_KNM3 = LBF_KN / FT**3
 PCI_KNM3 = LBF_KN / 0.0254**3
 LBF_FT_KNM = LBF_KN * FT
-UNITS = dict(depth='ft', density='lb/ft^3', cohesion='kip/ft^2',
+UNITS = dict(depth='ft', density='lb/ft^3', cohesion='lb/ft^2',
              friction_angle='degrees', subgrade_modulus='lb/in^3', strain='unitless')
 
 
@@ -124,7 +124,7 @@ def prepare(document, settings):
         if model == 'API_clay':
             cohesion = choose(mapping['cohesion'], ('cohesion_ultimate', 'cohesion_factored'), source)
             strain = choose(mapping['strain'], ('e50', 'e50_factored'), source)
-            kwargs['Su'] = number(getattr(soil, cohesion), source + ' ' + cohesion, 0, True) * KSF_KPA
+            kwargs['Su'] = number(getattr(soil, cohesion), source + ' ' + cohesion, 0, True) * PSF_KPA
             kwargs['eps50'] = number(getattr(soil, strain), source + ' ' + strain, 0, True)
             if kwargs['eps50'] >= 1:
                 raise ValueError(source + ': epsilon50 must be a unitless fraction below 1; no percent conversion is assumed.')

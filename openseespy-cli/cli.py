@@ -15,6 +15,7 @@ from springs import mesh_and_springs
 
 def prepare(document, settings):
     plan = prepare_common(document, settings)
+    plan['projection_height_m'] = number(settings.get('projection_height_ft', 1), 'projection_height_ft', 0) * 0.3048
     options = dict(settings['opensees'])
     for key in ('load_steps',):
         number(options[key], key, 0, True)
@@ -74,7 +75,7 @@ def imperial_spring(spring):
 
 def imperial_plan(plan):
     result = copy.deepcopy(plan)
-    for key in ('diameter', 'embedment', 'water_elevation', 'mesh'):
+    for key in ('diameter', 'embedment', 'water_elevation', 'mesh', 'projection_height'):
         result[key + '_ft'] = result.pop(key + '_m') / M_PER_FT
     result['node_depths_ft'] = [v / M_PER_FT for v in result.pop('node_depths_m')]
     result['springs'] = [imperial_spring(s) for s in result['springs']]

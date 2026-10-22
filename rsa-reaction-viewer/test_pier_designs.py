@@ -8,7 +8,7 @@ from preparation_report import soil_report_rows, markdown_report
 
 
 class PreparationTests(unittest.TestCase):
-    def run_fixture(self, boring='SB3', end=10, reactions=None, assignment='SB3', descriptive_header=False, soil_units=None, start=0, next_start=None, percentage_cells=False):
+    def run_fixture(self, boring='SB3', end=10, reactions=None, assignment='SB3', descriptive_header=False, soil_units=None, start=0, next_start=None, percentage_cells=False, multiline_cohesion=False):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / 'inputs.xlsx'
             book = Workbook()
@@ -16,6 +16,8 @@ class PreparationTests(unittest.TestCase):
             soil.title = 'GEOTECH PARAMETERS'
             soil.append(['NUMBER', boring])
             headers = list(SOIL_FIELDS)
+            if multiline_cohesion:
+                headers[5] = 'COHESION\nFACT.(PSF)'
             row = [start, end, 'SOFT CLAY', 125, 1, 0.66, 0, 200, '-', 133, 1, 1.5]
             if descriptive_header:
                 headers[9] = 'FACTORED MODULUS OF SUBGRADE REACTION (STATIC)'
@@ -107,8 +109,12 @@ class PreparationTests(unittest.TestCase):
         self.assertEqual(layer.raw_properties['e50_factored'], 1.5)
         self.assertEqual(layer.properties.k_static_factored, 133)
         self.assertFalse(any('Confirm soil unit' in i.message or 'END depth' in i.message for i in result.issues))
+        self.assertEqual(result.soil_profiles[0].units['cohesion'], 'lb/ft^2')
+        self.assertEqual(layer.properties.cohesion_ultimate, 1)
+        self.assertEqual(layer.raw_properties['cohesion_ultimate'], 1)
         rows = soil_report_rows(result)
         self.assertEqual(next(r[7] for r in rows if r[4] == 'density'), 'lb/ft^3')
+        self.assertEqual(next(r[7] for r in rows if r[4] == 'cohesion_ultimate'), 'lb/ft^2')
 
     def test_depth_origin_and_layer_continuity(self):
         valid = self.run_fixture(next_start=10)
@@ -125,6 +131,15 @@ class PreparationTests(unittest.TestCase):
         layer = self.run_fixture(percentage_cells=True).soil_profiles[0].layers[0]
         self.assertEqual(layer.properties.e50, 0.01)
         self.assertEqual(layer.properties.e50_factored, 0.015)
+
+    def test_psf_cohesion_headers_with_excel_line_break(self):
+        result = self.run_fixture(multiline_cohesion=True)
+        layer = result.soil_profiles[0].layers[0]
+        self.assertEqual(layer.properties.cohesion_ultimate, 1)
+        self.assertEqual(layer.properties.cohesion_factored, 0.66)
+        self.assertEqual(layer.cells['cohesion_ultimate'], 'GEOTECH PARAMETERS!E3')
+        self.assertEqual(layer.cells['cohesion_factored'], 'GEOTECH PARAMETERS!F3')
+        self.assertFalse(any('Missing columns' in i.message for i in result.issues))
 
     def test_typed_parameters_preserve_json_and_source_tracking(self):
         import json

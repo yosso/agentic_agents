@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from cli import prepare, main, FT, KSF_KPA, PCI_KNM3
+from cli import prepare, main, FT, PSF_KPA, PCI_KNM3
 
 
 class InputTests(unittest.TestCase):
@@ -16,7 +16,7 @@ class InputTests(unittest.TestCase):
     def test_units_depths_and_coincident_vector(self):
         plan = prepare(self.doc, self.settings)
         self.assertAlmostEqual(plan['embedment_m'], 30 * FT)
-        self.assertAlmostEqual(plan['layers'][0]['parameters']['Su'], KSF_KPA)
+        self.assertAlmostEqual(plan['layers'][0]['parameters']['Su'], 1000 * PSF_KPA)
         self.assertEqual(plan['loads'], dict(Py=1, Mx=1, Pz=-1))
         self.assertEqual(plan['layers'][0]['parameters']['eps50'], .01)
         self.assertEqual(plan['reaction']['MZ'], 0)
